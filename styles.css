@@ -100,7 +100,7 @@ nav ul li a:hover {
 
 .product-card {
     background: var(--text-color);
-    background-color: rgba(255, 255, 255, 0.294);
+    background-color: rgba(255, 255, 255, 0.871);
     border-radius: var(--border-radius);
     overflow: visible;
     box-shadow: var(--card-shadow);
@@ -550,10 +550,6 @@ footer {
         margin-bottom: 20px;
         text-align: left;
     }
-    .hero {
-        height: 60vh; /* Reduce la altura en móviles */
-        background-position: top center; /* Asegura que la parte importante sea visible */
-    }
 
     .foto {
         text-align: center;
@@ -590,7 +586,6 @@ footer {
 /* Estilos para la sección hero */
 .hero {
     background: url('assets/fondos/fondoPrincipal.png') no-repeat center center/cover;
-    background-size: 100% 100%; /* Ajusta al 100% del contenedor */
     background-position: center;
     background-repeat: no-repeat;
     color: var(--text-color);
