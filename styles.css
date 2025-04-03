@@ -7,6 +7,7 @@
     --hover-color: #128C7E;
     --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     --border-radius: 10px;
+    --star-color: #ffc107;
 }
 
 /* Reset básico */
@@ -66,14 +67,15 @@ nav ul li a:hover {
     transform: scale(1.2);
 }
 
-
 .social-media img:hover {
     transform: scale(1.2);
 }
 
 /* Estilos para la sección de productos */
 .products {
-    background: url('assets/fondos/fondoDos.png') no-repeat center center/cover;
+    background: url('assets/fondos/fondoProductos.png') no-repeat center center/cover;   
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 1px;
@@ -92,17 +94,18 @@ nav ul li a:hover {
     justify-content: center;
     gap: 10px;
     padding: 1rem;
-    max-width: 1200px; /* Ajusta este valor según el espacio disponible */
-    margin: 0 auto; /* Centra el contenedor */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .product-card {
     background: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.294);
     border-radius: var(--border-radius);
-    overflow: hidden;
+    overflow: visible;
     box-shadow: var(--card-shadow);
     transition: transform 0.3s ease;
-    width: calc(25% - 30px); /* 4 tarjetas por fila en escritorio */
+    width: calc(25% - 30px);
     margin: 10px;
     padding-bottom: 1rem;
     display: flex;
@@ -115,7 +118,7 @@ nav ul li a:hover {
 
 .product-card img {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
 }
 
@@ -129,94 +132,195 @@ nav ul li a:hover {
     font-size: 1rem;
     margin: 0.5rem 0;
     color: #555;
-    flex-grow: 1; /* Hace que el texto ocupe el espacio restante */
+    flex-grow: 1;
 }
 
 .product-card .add-to-cart {
     margin-top: 0.5rem;
 }
 
-
-
-/* Estilos para la galería */
-.gallery {
+/* Estilos para la sección de reseñas */
+.reviews {
     padding: 4rem 2rem;
-    background: url('assets/fondos/fondoTres.png') no-repeat center center/cover;
+    background: url('assets/fondos/fondoReseña.png') no-repeat center center/cover;
     text-align: center;
 }
 
-.gallery h2 {
+.reviews h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: #fff;
-    
 }
 
-.video-container {
-    max-width: 800px;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
-    position: relative;
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
     margin: 0 auto;
-    border: none;
-    overflow: hidden;
-    box-shadow: none;
-    
 }
 
-video {    
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.review-card {
+    background: rgba(255, 255, 255, 0.809);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary-color);
+}
+
+.review-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--background-color);
+}
+
+.stars {
+    color: var(--star-color);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.review-card p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+}
+
+/*estilos para galeria*/
+.gallery {
+    font-weight: bold;
+    padding: 4rem 0;
+    background: url('assets/fondos/fondoGaleria.png') no-repeat center center/cover;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100vw; /* Ocupa el 100% del viewport width */
+    margin-left: calc(-50vw + 50%); /* Centrado exacto */
+}
+.gallery h2 {
+    font-size: 2.5rem;
+}
+
+.gallery-reel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    height: 500px; /* Altura fija para el contenedor */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .reel-track {
     display: flex;
     width: 100%;
+    height: 100%;
     transition: transform 0.5s ease;
 }
 
 .reel-item {
     flex: 0 0 100%;
-    position: relative;
-    overflow: hidden;
-    height: 500px;
+    min-width: 100%;
+    height: 100%;
 }
 
 .reel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius);
+    object-fit: cover; /* Ajusta la imagen manteniendo proporciones */
+    border-radius: 10px;
 }
-
+/* Controles manuales */
 .prev-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
     border: none;
-    padding: 10px;
     cursor: pointer;
     z-index: 10;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 0;
 }
 
+/* Flechas creadas con CSS */
+.prev-btn::before, .next-btn::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-left: 5px solid white;
+    border-bottom: 5px solid white;
+    transition: all 0.3s ease;
+}
+
+.prev-btn::before {
+    transform: rotate(45deg);
+    margin-right: 3px;
+}
+
+.next-btn::before {
+    transform: rotate(-135deg);
+    margin-left: 3px;
+}
+
+/* Efectos hover */
+.prev-btn:hover, .next-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn:hover::before, .next-btn:hover::before {
+    border-color: #ffcc00; /* Amarillo al hover */
+}
+
+/* Posicionamiento */
 .prev-btn {
-    left: 10px;
+    left: 20px;
 }
 
 .next-btn {
-    right: 10px;
+    right: 20px;
 }
 
-.prev-btn:hover, .next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+/* Efecto de click */
+.prev-btn:active, .next-btn:active {
+    transform: translateY(-50%) scale(0.95);
 }
+
+/* Animación de pulso (opcional) */
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.1); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+.prev-btn, .next-btn {
+    animation: pulse 3s infinite;
+}
+
 
 /* Estilos para el footer */
 footer {
@@ -259,11 +363,12 @@ footer {
 /* Estilos para el carrito */
 .cart {
     padding: 2rem;
-    background: #d1cfcf25;
+    background: #fffefe21;
     margin-top: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
 }
+
 .cart-empty {
     text-align: center;
     color: #888;
@@ -344,6 +449,7 @@ footer {
 .add-to-cart:hover {
     background: #45a049;
 }
+
 .add-to-cart {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 1s ease;
@@ -351,7 +457,7 @@ footer {
 
 .add-to-cart:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px); /* Mueve el botón hacia abajo */
+    transform: translateY(2px);
 }
 
 #checkout {
@@ -415,6 +521,7 @@ footer {
     height: auto;
     border-radius: var(--border-radius);
 }
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
     header {
@@ -443,35 +550,49 @@ footer {
         margin-bottom: 20px;
         text-align: left;
     }
+    .hero {
+        height: 60vh; /* Reduce la altura en móviles */
+        background-position: top center; /* Asegura que la parte importante sea visible */
+    }
 
     .foto {
         text-align: center;
     }
-    video {
-        object-fit: cover; /* Muestra el video completo sin recortar */
-    }
+
     .products-grid {
-        flex-direction: row; /* Mantén la dirección en fila */
-        justify-content: center; /* Centra las tarjetas */
-        gap: 10px; /* Espacio entre tarjetas */
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
     }
 
     .product-card {
-        width: calc(50% - 20px); /* 2 tarjetas por fila en móviles */
-        margin: 10px 0; /* Reduce el margen horizontal */
-        min-height: auto; /* Ajusta la altura automáticamente */
+        width: calc(50% - 20px);
+        margin: 10px 0;
+        min-height: auto;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    .gallery-reel {
+        height: 300px; /* Más bajo en móviles */
     }
 }
+
 /* Estilos para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .product-card {
-        width: 100%; /* 1 tarjeta por fila en pantallas muy pequeñas */
-        margin: 10px 0; /* Reduce el margen horizontal */
+        width: 100%;
+        margin: 10px 0;
     }
 }
+
 /* Estilos para la sección hero */
 .hero {
     background: url('assets/fondos/fondoPrincipal.png') no-repeat center center/cover;
+    background-size: 100% 100%; /* Ajusta al 100% del contenedor */
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--text-color);
     height: 100vh;
     display: flex;
@@ -483,12 +604,12 @@ footer {
 }
 
 .hero h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
 }
 
 .hero p {
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
     font-weight: bold;
 }
@@ -507,7 +628,6 @@ footer {
     background: var(--secondary-color);
 }
 
-
 .social-media {
     margin-top: 20px;
     display: flex;
@@ -515,7 +635,26 @@ footer {
 }
 
 .social-media img {
-    width: 40px;
+    width: 4rem;
     height: auto;
     transition: transform 0.3s ease;
+}
+.discover-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--background-color);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 80%;
+    box-shadow: var(--card-shadow);
+}
+
+.discover-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
 }

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panadería - Happy Tummy</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="assets/logo.png">
+    <link rel="icon" type="image/x-icon" href="assets/icons/fondoHappyTummy.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/otros/logoPrincipal.png" alt="Logo de Happy Tummy">
+            <img src="assets/icons/fondoHappyTummy.png" alt="Logo de Happy Tummy">
         </div>
         <nav>
             <ul>
@@ -21,40 +21,59 @@
         </nav>
     </header>
     <main>
-        <section class="products">
+        <section id="panaderia" class="products">
             <h2>Panadería</h2>
-            <div class="products-grid">
+            <div class="products-grid">                
                 <div class="product-card">
-                    <img src="assets/productos/panaderia/panDeArrozIntegral.png" alt="Pan de Arroz Integral">
-                    <h3>Pan de Arroz Integral</h3>
-                    <p>Libre de Gluten y Conservantes. <br>Sin azucar ni levadura <br>Producto disponible cada 15 días. Solo los lunes</p>                    
-                    <p>Valor: $7.000</p>
-                    <button class="add-to-cart" data-name="Pan de Arroz Integral" data-price="7000">Añadir al carrito</button>
-                </div>
-                <!--div class="product-card">
-                    <img src="assets/productos/pastel2.jpg" alt="Pastel Tres Leches">
-                    <h3>Pastel Tres Leches <br> (1Libra)</h3>
-                    <p>Delicioso pastel tres leches con un toque de vainilla. <br>Rinde 50 porciones</p>
-                    <p>Día disponible: Sobre pedido</p>
-                    <p>Valor: $60.000</p>
-                    <button class="add-to-cart" data-name="Pastel Tres Leches (1 Libra)" data-price="60000">Añadir al carrito</button>
+                    <img src="assets/productos/panaderia/panuvasYmani.png" alt="Pan de Uvas Pasas y Maní">
+                    <h3>Pan de Uvas Pasas <br>y Maní</h3>
+                    <p>Pan tajado <br>Hecho con harina integral</p>                    
+                    <button class="add-to-cart" data-name="Pan/UvasPasas/Maní" data-price="0">Añadir al carrito</button>
                 </div>
                 <div class="product-card">
-                    <img src="assets/productos/pasteldecoco.jpg" alt="Pastel de Coco">
-                    <h3>Pastel de Coco <br> (1/2 Libra)</h3>
-                    <p>Pastel de coco con relleno cremoso y coco. <br>Rinde 15 porciones</p>
-                    <p>Día disponible: Sobre pedido</p>
-                    <p>Valor: $20.000</p>
-                    <button class="add-to-cart" data-name="Pastel de Coco (1/2 Libra)" data-price="20000">Añadir al carrito</button>
+                    <img src="assets/productos/panaderia/panuvaspasasmani.jpg" alt="Pan de Quinua y Maní">
+                    <h3>Pan de Quinua <br>y Maní</h3>
+                    <p>Pan tajado <br>Hecho con harina de Quinua</p>                    
+                    <button class="add-to-cart" data-name="Pan/Quinua/Maní" data-price="0">Añadir al carrito</button>
                 </div>
                 <div class="product-card">
-                    <img src="assets/productos/pasteldecoco.jpg" alt="Pastel Tres Leches">
-                    <h3>Pastel de Coco <br> (1Libra)</h3>
-                    <p>Pastel de coco con relleno cremoso y coco. <br>Rinde 50 porciones</p>
-                    <p>Día disponible: Sobre pedido</p>
-                    <p>Valor: $50.000</p>
-                    <button class="add-to-cart" data-name="Pastel Tres Leches (1 Libra)" data-price="50000">Añadir al carrito</button>
-                </div-->
+                    <img src="assets/productos/panaderia/panuvaspasasmani.jpg" alt="Pan de centeno y Avena">
+                    <h3>Pan de Centeno <br>y Avena</h3>
+                    <p>Pan tajado <br>Hechos con harina de Centeno</p>                    
+                    <button class="add-to-cart" data-name="Pan/Centeno/Avena" data-price="0">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="assets/productos/panaderia/mogollasUvas.png" alt="Mogollas con Uvas">
+                    <h3>Mogollas con Uvas</h3>
+                    <p>12 unidades <br>Hechos con harina integral <br>Y uvas pasas</p>                    
+                    <button class="add-to-cart" data-name="Mogollas/Uvas 12Unids" data-price="0">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="assets/productos/panaderia/panuvaspasasmani.jpg" alt="Panecillos">
+                    <h3>Panecillos</h3>
+                    <p>10 unidades <br>Hechos con harina integral</p>                    
+                    <button class="add-to-cart" data-name="Panecillos 10Unids" data-price="0">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="assets/productos/panaderia/panuvaspasasmani.jpg" alt="Tostadas Integral">
+                    <h3>Tostadas Integral</h3>
+                    <p>23 unidades aprox.<br>Hechas con harina integral</p>                    
+                    <button class="add-to-cart" data-name="Tostadas/integral 23Unids aprox." data-price="0">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="assets/productos/panaderia/panuvaspasasmani.jpg" alt="Calados Integral">
+                    <h3>Calados Integral</h3>
+                    <p>8 unidades<br>Hechos con harina integral</p>                    
+                    <button class="add-to-cart" data-name="Calados/integral 8Unids" data-price="0">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <div></div>
+                    <a href="panEspecial.html">
+                        <h3>Pan Especial</h3>                        
+                        <img src="assets/productos/panaderia/panDeArrozIntegral.png" alt="Pan de Arroz Integral">
+                    </a>
+                    <a href="panEspecial.html" class="discover-btn">Descubre Más Opciones</a>
+                </div>
             </div>
         </section>
     </main>
@@ -64,6 +83,7 @@
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
         <img src="assets/icons/whatsapp.png" alt="WhatsApp">
     </a>
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carrito.js"></script>
 </body>
 </html>
