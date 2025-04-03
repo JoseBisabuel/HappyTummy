@@ -1,16 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("Carrito cargado"); // Verifica que el script se esté ejecutando
+    console.log("Carrito cargado");
 
-    // Cargar el carrito desde localStorage
     let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     console.log("Carrito cargado desde localStorage:", cartItems);
 
-    // Seleccionar elementos del carrito
     const cartContainer = document.querySelector('.cart-items');
     const totalElement = document.getElementById('total');
     const checkoutButton = document.getElementById('checkout');
 
-    // Función para actualizar el carrito
     function updateCart() {
         if (cartContainer && totalElement) {
             console.log("Actualizando carrito...");
@@ -35,12 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             console.log("Carrito guardado en localStorage:", cartItems);
 
-            // Asignar eventos a los botones de eliminar
             addRemoveItemEvents();
         }
     }
 
-    // Función para añadir eventos a los botones de eliminar
     function addRemoveItemEvents() {
         document.querySelectorAll('.remove-item').forEach((button) => {
             button.addEventListener('click', function () {
@@ -51,13 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Añadir productos al carrito
     document.querySelectorAll('.add-to-cart').forEach((button) => {
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function() {
             const name = this.getAttribute('data-name');
             const price = parseInt(this.getAttribute('data-price'));
-
-            console.log("Añadiendo producto:", name, price);
+            
+            this.classList.add('added');
 
             const existingItem = cartItems.find(item => item.name === name);
             if (existingItem) {
@@ -68,16 +62,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             updateCart();
-            
-            // Feedback visual
-            this.textContent = "¡Añadido!";
+
             setTimeout(() => {
-                this.textContent = "Añadir al carrito";
+                this.classList.remove('added');
+            }, 1000);
+            
+            const originalText = this.textContent;
+            this.textContent = "✓ Añadido";
+            setTimeout(() => {
+                this.textContent = originalText;
             }, 1000);
         });
     });
 
-    // Continuar pedido por WhatsApp
     if (checkoutButton) {
         checkoutButton.addEventListener('click', function () {
             if (cartItems.length === 0) {
@@ -95,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Cargar el carrito al iniciar la página
     if (cartContainer && totalElement) {
         updateCart();
     }
