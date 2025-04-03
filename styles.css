@@ -1,4 +1,4 @@
-/* Variables CSS */
+/* ========== VARIABLES Y RESET ========== */
 :root {
     --primary-color: #ffcc00;
     --secondary-color: #e6b800;
@@ -8,9 +8,9 @@
     --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     --border-radius: 10px;
     --star-color: #ffc107;
+    --success-color: #4CAF50;
 }
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -23,7 +23,7 @@ body {
     color: #333;
 }
 
-/* Estilos generales del header */
+/* ========== HEADER ========== */
 header {
     background-color: rgba(41, 39, 39, 0.5);
     color: var(--text-color);
@@ -38,12 +38,8 @@ header {
     z-index: 1000;
 }
 
-header .logo img {
+.logo img {
     height: 70px;
-}
-
-nav {
-    margin-right: 2px;
 }
 
 nav ul {
@@ -54,28 +50,96 @@ nav ul {
     padding: 0;
 }
 
-nav ul li a {
+nav a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-nav ul li a:hover {
+nav a:hover {
     color: var(--primary-color);
     transform: scale(1.2);
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    background: url('assets/fondos/fondoPrincipal.png') no-repeat center/cover;
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.hero .btn {
+    background: var(--primary-color);
+    color: var(--background-color);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: var(--secondary-color);
+}
+
+.social-media {
+    margin-top: 20px;
+    display: flex;
+    gap: 40px;
+}
+
+.social-media img {
+    width: 3rem;
+    height: auto;
+    transition: transform 0.3s ease;
 }
 
 .social-media img:hover {
     transform: scale(1.2);
 }
 
-/* Estilos para la sección de productos */
+.discover-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--background-color);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 80%;
+    box-shadow: var(--card-shadow);
+}
+
+.discover-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* ========== PRODUCTOS ========== */
 .products {
-    background: url('assets/fondos/fondoProductos.png') no-repeat center center/cover;   
-    background-position: center;
-    background-repeat: no-repeat;
+    background: url('assets/fondos/fondoProductos.png') no-repeat center/cover;
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 1px;
@@ -91,32 +155,37 @@ nav ul li a:hover {
 .products-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Alinea las tarjetas desde el inicio */
-    gap: 20px; /* Espacio entre tarjetas */
+    justify-content: flex-start;
+    gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
 }
 
-/* Tarjetas individuales (3 por fila) */
 .product-card {
-    width: calc(33.33% - 14px); /* 33.33% del ancho - gap (20px / 3 ≈ 14px) */
-    margin: 0; /* Elimina márgenes adicionales */
+    width: calc(33.33% - 14px);
     background: rgba(255, 255, 255, 0.871);
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     padding-bottom: 1rem;
+    overflow: hidden;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .product-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
 }
 
 .product-card h3 {
@@ -129,17 +198,44 @@ nav ul li a:hover {
     font-size: 1rem;
     margin: 0.5rem 0;
     color: #555;
-    flex-grow: 1;
 }
 
-.product-card .add-to-cart {
+/* ========== BOTÓN AÑADIR AL CARRITO ========== */
+.add-to-cart {
+    background: var(--success-color);
+    color: var(--text-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
     margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
 }
 
-/* Estilos para la sección de reseñas */
+.add-to-cart:hover {
+    background: #53b037;
+}
+
+/* Estado cuando se añade al carrito */
+.add-to-cart.added {
+    background:#cc0000;
+    animation: pulse 0.1s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0); }
+    50% { transform: scale(0px); }
+    100% { transform: scale(0); }
+}
+
+/* ========== RESEÑAS ========== */
 .reviews {
     padding: 4rem 2rem;
-    background: url('assets/fondos/fondoReseña.png') no-repeat center center/cover;
+    background: url('assets/fondos/fondoReseña.png') no-repeat center/cover;
     text-align: center;
 }
 
@@ -162,7 +258,7 @@ nav ul li a:hover {
     border-radius: var(--border-radius);
     padding: 1.5rem;
     box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .review-card:hover {
@@ -197,18 +293,18 @@ nav ul li a:hover {
     color: #555;
 }
 
-/*estilos para galeria*/
+/* ========== GALERÍA ========== */
 .gallery {
     font-weight: bold;
     padding: 4rem 0;
-    background: url('assets/fondos/fondoGaleria.png') no-repeat center center/cover;
+    background: url('assets/fondos/fondoGaleria.png') no-repeat center/cover;
     text-align: center;
     color: white;
     position: relative;
-    overflow: hidden;
-    width: 100vw; /* Ocupa el 100% del viewport width */
-    margin-left: calc(-50vw + 50%); /* Centrado exacto */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
 }
+
 .gallery h2 {
     font-size: 2.5rem;
 }
@@ -218,7 +314,7 @@ nav ul li a:hover {
     width: 100%;
     max-width: 800px;
     margin: auto;
-    height: 400px; /* Altura fija para el contenedor */
+    height: 400px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -240,15 +336,16 @@ nav ul li a:hover {
 .reel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta la imagen manteniendo proporciones */
+    object-fit: cover;
     border-radius: 10px;
 }
-/* Controles manuales */
+
+/* Controles de navegación */
 .prev-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
+    background: rgba(0, 0, 0, 0.7);
     border: none;
     cursor: pointer;
     z-index: 10;
@@ -263,7 +360,6 @@ nav ul li a:hover {
     padding: 0;
 }
 
-/* Flechas creadas con CSS */
 .prev-btn::before, .next-btn::before {
     content: "";
     display: block;
@@ -284,94 +380,41 @@ nav ul li a:hover {
     margin-left: 3px;
 }
 
-/* Efectos hover */
 .prev-btn:hover, .next-btn:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(22, 113, 31, 0.9);
     transform: translateY(-50%) scale(1.1);
 }
 
 .prev-btn:hover::before, .next-btn:hover::before {
-    border-color: #ffcc00; /* Amarillo al hover */
+    border-color: var(--primary-color);
 }
 
-/* Posicionamiento */
 .prev-btn {
-    left: 20px;
+    left: 50px;
 }
 
 .next-btn {
-    right: 20px;
+    right: 50px;
 }
 
-/* Efecto de click */
 .prev-btn:active, .next-btn:active {
     transform: translateY(-50%) scale(0.95);
 }
 
-/* Animación de pulso (opcional) */
 @keyframes pulse {
     0% { transform: translateY(-50%) scale(1); }
     50% { transform: translateY(-50%) scale(1.1); }
     100% { transform: translateY(-50%) scale(1); }
 }
-.prev-btn, .next-btn {
-    animation: pulse 3s infinite;
-}
 
-
-/* Estilos para el footer */
-footer {
-    background: var(--background-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
-}
-
-/* Estilos para el botón de WhatsApp */
-.whatsapp-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25d366;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: var(--card-shadow);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    text-decoration: none;
-    transition: 0.3s ease, transform 0.3s ease;
-}
-
-.whatsapp-btn img {
-    width: 50px;
-    height: auto;
-}
-
-.whatsapp-btn:hover {
-    background: var(--hover-color);
-    transform: scale(1.1);
-}
-
-/* Estilos para el carrito */
+/* ========== CARRITO ========== */
 .cart {
-    background: url('assets/fondos/fondoCarrito.png') no-repeat center center / cover;
+    background: url('assets/fondos/fondoCarrito.png') no-repeat center/cover;
     padding: 2rem;
     margin-top: 3.8rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     min-height: 75vh;
-    flex-grow: 1; /* Ocupa el espacio restante */
-}
-
-.cart-empty {
-    text-align: center;
-    color: #888;
-    font-style: italic;
 }
 
 .cart h2 {
@@ -418,6 +461,7 @@ footer {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
+    transition: all 0.3s ease;
 }
 
 .remove-item:hover {
@@ -433,36 +477,10 @@ footer {
     border-top: 2px solid #ddd;
 }
 
-.add-to-cart {
-    background: #4CAF50;
-    color: var(--text-color);
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: 0.3s ease;
-    margin-top: 0.5rem;
-}
-
-.add-to-cart:hover {
-    background: #45a049;
-}
-
-.add-to-cart {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 1s ease;
-}
-
-.add-to-cart:active {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px);
-}
-
 #checkout {
     background: #25d366;
     color: var(--text-color);
-    padding: 20px 20px;
+    padding: 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -472,19 +490,20 @@ footer {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #checkout:hover {
     background: var(--hover-color);
+    transform: translateY(-2px);
 }
 
-/* Estilos para la biografía */
+/* ========== BIOGRAFÍA ========== */
 .biografia {
-    margin-top: 1px;    
-    background: url('assets/fondos/fondoTres.png') no-repeat center center / cover;
+    margin-top: 1px;
+    background: url('assets/fondos/fondoTres.png') no-repeat center/cover;
     text-align: center;
-    padding: 70px;    
+    padding: 70px;
 }
 
 .titulo-biografia {
@@ -507,7 +526,6 @@ footer {
     flex: 1;
     margin-right: 20px;
     text-align: justify;
-    text-justify: auto;
 }
 
 .foto {
@@ -521,13 +539,50 @@ footer {
     border-radius: var(--border-radius);
 }
 
-/* Estilos para dispositivos móviles */
+/* ========== FOOTER Y WHATSAPP ========== */
+footer {
+    background: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-btn img {
+    width: 50px;
+    height: auto;
+}
+
+.whatsapp-btn:hover {
+    background: var(--hover-color);
+    transform: scale(1.1);
+}
+
+/* ========== MEDIA QUERIES ========== */
 @media (max-width: 768px) {
     header {
         padding: 0.5rem 1rem;
     }
 
-    header .logo img {
+    .logo img {
         height: 50px;
     }
 
@@ -535,7 +590,7 @@ footer {
         gap: 10px;
     }
 
-    nav ul li a {
+    nav a {
         font-size: 0.9rem;
     }
 
@@ -555,121 +610,48 @@ footer {
     }
 
     .products-grid {
-        flex-direction: row;
         justify-content: center;
-        gap: 10px;
     }
 
     .product-card {
         width: calc(50% - 10px);
-        margin: 10px 0;
-        min-height: auto;
     }
 
     .reviews-grid {
         grid-template-columns: 1fr;
     }
+
     .gallery-reel {
-        height: 250px; /* Altura reducida para móviles */
-        max-width: 90%; /* Ocupa el 90% del ancho en móviles */
+        height: 250px;
+        max-width: 90%;
     }
+
     .prev-btn, .next-btn {
         width: 40px;
         height: 40px;
+        top: 60%;
     }
 
     .prev-btn::before, .next-btn::before {
         width: 15px;
         height: 15px;
     }
-
-    /* Posición vertical de los botones */
-    .prev-btn, .next-btn {
-        top: 60%; /* Centra verticalmente respecto al nuevo height */
-        transform: translateY(-50%); /* Ajuste fino para centrar */
-        width: 40px;
-        height: 40px;
-    }
 }
 
-/* Estilos para pantallas muy pequeñas */
 @media (max-width: 480px) {
     .product-card {
         width: 100%;
-        margin: 10px 0;
     }
+
     .gallery-reel {
-        height: 200px; /* Altura aún más reducida */
+        height: 200px;
     }
-}
 
-/* Estilos para la sección hero */
-.hero {
-    background: url('assets/fondos/fondoPrincipal.png') no-repeat center center/cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: var(--text-color);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 1px;
-}
+    .hero h1 {
+        font-size: 2.5rem;
+    }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    font-weight: bold;
-}
-
-.hero .btn {
-    background: var(--primary-color);
-    color: var(--background-color);
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    font-size: 1.2rem;
-    transition: 0.3s ease;
-}
-
-.hero .btn:hover {
-    background: var(--secondary-color);
-}
-
-.social-media {
-    margin-top: 20px;
-    display: flex;
-    gap: 40px;
-}
-
-.social-media img {
-    width: 4rem;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-.discover-btn {
-    display: inline-block;
-    background: var(--primary-color);
-    color: var(--background-color);
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: bold;
-    margin: 10px auto;
-    text-align: center;
-    transition: all 0.3s ease;
-    width: 80%;
-    box-shadow: var(--card-shadow);
-}
-
-.discover-btn:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
+    .hero p {
+        font-size: 1.5rem;
+    }
 }
