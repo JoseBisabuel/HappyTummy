@@ -27,7 +27,7 @@ body {
 header {
     background-color: rgba(41, 39, 39, 0.5);
     color: var(--text-color);
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ header {
 }
 
 header .logo img {
-    height: 60px;
+    height: 70px;
 }
 
 nav {
@@ -91,25 +91,22 @@ nav ul li a:hover {
 .products-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 1rem;
+    justify-content: flex-start; /* Alinea las tarjetas desde el inicio */
+    gap: 20px; /* Espacio entre tarjetas */
     max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
+/* Tarjetas individuales (3 por fila) */
 .product-card {
-    background: var(--text-color);
-    background-color: rgba(255, 255, 255, 0.871);
+    width: calc(33.33% - 14px); /* 33.33% del ancho - gap (20px / 3 ≈ 14px) */
+    margin: 0; /* Elimina márgenes adicionales */
+    background: rgba(255, 255, 255, 0.871);
     border-radius: var(--border-radius);
-    overflow: visible;
     box-shadow: var(--card-shadow);
     transition: transform 0.3s ease;
-    width: calc(25% - 30px);
-    margin: 10px;
     padding-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
 }
 
 .product-card:hover {
@@ -221,7 +218,7 @@ nav ul li a:hover {
     width: 100%;
     max-width: 800px;
     margin: auto;
-    height: 500px; /* Altura fija para el contenedor */
+    height: 400px; /* Altura fija para el contenedor */
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -362,11 +359,13 @@ footer {
 
 /* Estilos para el carrito */
 .cart {
+    background: url('assets/fondos/fondoCarrito.png') no-repeat center center / cover;
     padding: 2rem;
-    background: #fffefe21;
-    margin-top: 2rem;
+    margin-top: 3.8rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
+    min-height: 75vh;
+    flex-grow: 1; /* Ocupa el espacio restante */
 }
 
 .cart-empty {
@@ -562,7 +561,7 @@ footer {
     }
 
     .product-card {
-        width: calc(50% - 20px);
+        width: calc(50% - 10px);
         margin: 10px 0;
         min-height: auto;
     }
@@ -571,7 +570,25 @@ footer {
         grid-template-columns: 1fr;
     }
     .gallery-reel {
-        height: 300px; /* Más bajo en móviles */
+        height: 250px; /* Altura reducida para móviles */
+        max-width: 90%; /* Ocupa el 90% del ancho en móviles */
+    }
+    .prev-btn, .next-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .prev-btn::before, .next-btn::before {
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Posición vertical de los botones */
+    .prev-btn, .next-btn {
+        top: 60%; /* Centra verticalmente respecto al nuevo height */
+        transform: translateY(-50%); /* Ajuste fino para centrar */
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -580,6 +597,9 @@ footer {
     .product-card {
         width: 100%;
         margin: 10px 0;
+    }
+    .gallery-reel {
+        height: 200px; /* Altura aún más reducida */
     }
 }
 
