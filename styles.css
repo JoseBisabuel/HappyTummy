@@ -62,6 +62,34 @@ nav a:hover {
     color: var(--primary-color);
     transform: scale(1.2);
 }
+/* ========== BOTÓN VOLVER ========== */
+.back-to-products {
+    position: fixed;
+    top: 140px; /* Ajusta según la altura de tu header */
+    left: 20px;
+    z-index: 999;
+    background: rgba(41, 39, 39, 0.8);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.back-btn {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.back-to-products:hover {
+    background: rgba(41, 39, 39, 0.95);
+    transform: translateX(-5px);
+}
+
+.back-btn:hover {
+    color: var(--text-color);
+}
 
 /* ========== HERO SECTION ========== */
 .hero {
@@ -410,16 +438,17 @@ nav a:hover {
 /* ========== CARRITO ========== */
 .cart {
     background: url('assets/fondos/fondoCarrito.png') no-repeat center/cover;
-    padding: 2rem;
+    padding: 1.6rem;
     margin-top: 3.8rem;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     min-height: 75vh;
+    justify-content: flex-start;
 }
 
 .cart h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+
     color: var(--background-color);
 }
 
@@ -592,6 +621,15 @@ footer {
 
     nav a {
         font-size: 0.9rem;
+    }
+    .back-to-products {
+        top: 125px; /* Ajusta según la altura de tu header en móvil */
+        left: 10px;
+        padding: 6px 12px;
+    }
+    
+    .back-btn {
+        font-size: 0.8rem;
     }
 
     .contenido-biografia {
