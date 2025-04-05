@@ -93,7 +93,7 @@ nav a:hover {
 
 /* ========== HERO SECTION ========== */
 .hero {
-    background: url('assets/fondos/fondoPrincipal.png') no-repeat center/cover;
+    background: url('assets/fondos/fondoPrincipal2.png') no-repeat center/cover;
     color: var(--text-color);
     height: 100vh;
     display: flex;
@@ -106,7 +106,7 @@ nav a:hover {
 
 .hero h1 {
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin-bottom: -22rem;
 }
 
 .hero p {
@@ -130,9 +130,10 @@ nav a:hover {
 }
 
 .social-media {
-    margin-top: 20px;
+    margin-top: 50px;
     display: flex;
     gap: 40px;
+    justify-content: center;
 }
 
 .social-media img {
@@ -631,6 +632,9 @@ footer {
     .back-btn {
         font-size: 0.8rem;
     }
+    .hero h1 {
+        margin-bottom: -22rem;
+    }
 
     .contenido-biografia {
         flex-direction: column;
@@ -657,6 +661,9 @@ footer {
 
     .reviews-grid {
         grid-template-columns: 1fr;
+    }
+    .reviews .social-media {
+        justify-content: center;
     }
 
     .gallery-reel {
