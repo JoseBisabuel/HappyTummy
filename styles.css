@@ -93,7 +93,7 @@ nav a:hover {
 
 /* ========== HERO SECTION ========== */
 .hero {
-    background: url('assets/fondos/fondoPrincipal2.png') no-repeat center/cover;
+    background: url('assets/fondos/fondoPrincipal3.png') no-repeat center/cover;
     color: var(--text-color);
     height: 100vh;
     display: flex;
@@ -485,7 +485,7 @@ nav a:hover {
     height: 400px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
 }
 
 .reel-track {
@@ -504,8 +504,10 @@ nav a:hover {
 .reel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Controles de navegación */
