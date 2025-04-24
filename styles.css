@@ -208,7 +208,7 @@ nav a:hover {
 
 .product-card img {
     width: 100%;
-    height: 200px;
+    height: 410px;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
@@ -793,6 +793,9 @@ footer {
 
     .product-card {
         width: calc(50% - 10px);
+    }
+    .product-card img {
+        height: 280px; 
     }
     .contact-container {
         flex-direction: column;
