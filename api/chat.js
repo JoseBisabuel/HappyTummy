@@ -29,10 +29,10 @@ module.exports = async (req, res) => {
                 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
                 
                 // Cambiamos a 'gemini-1.5-pro', que suele estar más disponible
-                const model = genAI.getGenerativeModel(
-                    { model: "gemini-1.5-pro" }, 
-                    { apiVersion: 'v1' }
-                );
+                const model = genAI.getGenerativeModel({
+                  model: "gemini-1.5-flash"
+                });
+
                 
                 const prompt = `Eres el asistente experto de la tienda vegana Vitalis (Happy Tummy). 
                 Responde de forma amable y humana.
@@ -49,6 +49,7 @@ module.exports = async (req, res) => {
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 const botReply = response.text();
+
 
                 // --- RESPONDER A WHATSAPP ---
                 await axios({
