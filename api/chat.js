@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
                 
                 // Aquí añadimos la versión 'v1' para evitar el error 404 de la beta
                 const model = genAI.getGenerativeModel(
-                    { model: "gemini-1.5-flash" },
+                    { model: "gemini-pro" },
                     { apiVersion: 'v1' }
                 );
                 
