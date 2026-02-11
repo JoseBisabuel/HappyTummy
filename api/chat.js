@@ -6,9 +6,10 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // IMPORTANTE: Si gemini-1.5-flash sigue dando 404, 
 // es un problema de actualización de librería (ejecuta: npm install @google/generative-ai)
+// Cambia la inicialización del modelo por esta:
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash", 
-});
+    model: "gemini-1.5-flash",
+}, { apiVersion: 'v1beta' }); // Forzamos explícitamente la versión de la API aquí
 
 const systemPrompt = `Eres el asistente experto de la tienda vegana Vitalis (Happy Tummy). 
 Responde de forma amable y humana.
