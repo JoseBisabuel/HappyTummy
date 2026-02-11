@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// Carga segura del catálogo
+// Carga del catálogo
 let productosData;
 try {
   productosData = require("./productos.json");
@@ -9,14 +9,16 @@ try {
   console.error("Error cargando productos.json:", e.message);
 }
 
+// Inicializamos la IA
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// CAMBIO CLAVE: Usamos la versión estable del nombre del modelo
+// SOLUCIÓN AL 404: Usamos el nombre exacto que Google reconoce en la versión estable
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash-latest", // Agregamos '-latest' para forzar la versión más reciente
+  model: "gemini-1.5-flash",
 });
 
 module.exports = async (req, res) => {
+  // --- VERIFICACIÓN WEBHOOK ---
   if (req.method === "GET") {
     const token = req.query["hub.verify_token"];
     const challenge = req.query["hub.challenge"];
@@ -24,6 +26,7 @@ module.exports = async (req, res) => {
     return res.status(403).send("Error");
   }
 
+  // --- PROCESAMIENTO MENSAJE ---
   if (req.method === "POST") {
     try {
       const entry = req.body.entry?.[0]?.changes?.[0]?.value;
@@ -39,31 +42,33 @@ module.exports = async (req, res) => {
           botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Visítanos en: https://happytummy.vercel.app/";
         } else {
           try {
-            // Limpieza y estructuración del catálogo para la IA
+            // Limpiamos el catálogo para enviarlo como texto simple
             const catalogoTexto = Object.keys(productosData).map(cat => {
               return productosData[cat].map(p => 
                 `- ${p.nombre}: $${p.precio}. ${p.descripcion}`
               ).join("\n");
             }).join("\n\n");
 
-            // Prompt directo y sin systemInstruction por separado para evitar el 404
-            const promptFinal = `Actúa como Vitalis, asistente de la tienda Happy Tummy. 
-            Usa EXCLUSIVAMENTE esta lista de productos para responder de forma amable y breve:
+            // Prompt optimizado
+            const promptFinal = `Eres Vitalis, el asistente de Happy Tummy. 
+            Responde brevemente usando esta lista:
             
             ${catalogoTexto}
 
-            Pregunta del cliente: ${customerText}
-            Respuesta:`;
+            Pregunta: ${customerText}`;
 
+            // Llamada a la IA con manejo de respuesta actualizado
             const result = await model.generateContent(promptFinal);
-            botReply = result.response.text();
+            const response = result.response;
+            botReply = response.text();
 
           } catch (aiError) {
-            console.error("Error detallado de Gemini:", aiError);
-            botReply = "¡Hola! 🌱 Tuve un inconveniente al consultar la lista. ¿Podrías intentar de nuevo o visitar nuestra web?";
+            console.error("Error Gemini:", aiError.message);
+            botReply = "¡Hola! 🌱 Tuve un problema técnico con la lista de precios. ¿Te puedo ayudar con otra cosa o prefieres ver la web?";
           }
         }
 
+        // --- ENVIAR A WHATSAPP ---
         await axios({
           method: "POST",
           url: `https://graph.facebook.com/v21.0/${process.env.PHONE_NUMBER_ID}/messages`,
@@ -80,7 +85,7 @@ module.exports = async (req, res) => {
       }
       return res.status(200).send("OK");
     } catch (error) {
-      console.error("Error en el proceso POST:", error.message);
+      console.error("Error POST:", error.message);
       return res.status(500).send("Error");
     }
   }
