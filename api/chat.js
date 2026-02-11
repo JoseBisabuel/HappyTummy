@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// Cargamos el catálogo (Ruta relativa correcta si está en /api)
+// Carga segura del catálogo
 let productosData;
 try {
   productosData = require("./productos.json");
@@ -11,13 +11,12 @@ try {
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// CORRECCIÓN: Usamos el nombre técnico del modelo
+// CAMBIO CLAVE: Usamos la versión estable del nombre del modelo
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash", 
+  model: "gemini-1.5-flash-latest", // Agregamos '-latest' para forzar la versión más reciente
 });
 
 module.exports = async (req, res) => {
-  // --- VERIFICACIÓN WEBHOOK ---
   if (req.method === "GET") {
     const token = req.query["hub.verify_token"];
     const challenge = req.query["hub.challenge"];
@@ -25,7 +24,6 @@ module.exports = async (req, res) => {
     return res.status(403).send("Error");
   }
 
-  // --- PROCESAMIENTO MENSAJE ---
   if (req.method === "POST") {
     try {
       const entry = req.body.entry?.[0]?.changes?.[0]?.value;
@@ -38,34 +36,34 @@ module.exports = async (req, res) => {
         let botReply;
 
         if (!productosData) {
-          botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Mira todo aquí: https://happytummy.vercel.app/";
+          botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Visítanos en: https://happytummy.vercel.app/";
         } else {
           try {
-            // Limpieza del JSON para que la IA no se pierda
+            // Limpieza y estructuración del catálogo para la IA
             const catalogoTexto = Object.keys(productosData).map(cat => {
               return productosData[cat].map(p => 
                 `- ${p.nombre}: $${p.precio}. ${p.descripcion}`
               ).join("\n");
             }).join("\n\n");
 
-            const promptFinal = `Eres Vitalis, asistente de Happy Tummy. 
-            Usa este catálogo:
+            // Prompt directo y sin systemInstruction por separado para evitar el 404
+            const promptFinal = `Actúa como Vitalis, asistente de la tienda Happy Tummy. 
+            Usa EXCLUSIVAMENTE esta lista de productos para responder de forma amable y breve:
+            
             ${catalogoTexto}
 
-            Cliente: ${customerText}
+            Pregunta del cliente: ${customerText}
             Respuesta:`;
 
             const result = await model.generateContent(promptFinal);
-            const response = await result.response;
-            botReply = response.text();
+            botReply = result.response.text();
 
           } catch (aiError) {
             console.error("Error detallado de Gemini:", aiError);
-            botReply = "¡Hola! 🌱 No pude consultar el catálogo. Revisa nuestra web: https://happytummy.vercel.app/";
+            botReply = "¡Hola! 🌱 Tuve un inconveniente al consultar la lista. ¿Podrías intentar de nuevo o visitar nuestra web?";
           }
         }
 
-        // --- ENVIAR A WHATSAPP ---
         await axios({
           method: "POST",
           url: `https://graph.facebook.com/v21.0/${process.env.PHONE_NUMBER_ID}/messages`,
@@ -82,7 +80,7 @@ module.exports = async (req, res) => {
       }
       return res.status(200).send("OK");
     } catch (error) {
-      console.error("Error en el POST:", error.message);
+      console.error("Error en el proceso POST:", error.message);
       return res.status(500).send("Error");
     }
   }
