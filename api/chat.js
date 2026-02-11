@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
                 // --- LLAMADA A LA IA (Usamos las variables de Vercel) ---
                 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }, { apiVersion: 'v1' });
                 
                 const prompt = `Eres el asistente experto de la tienda vegana Vitalis (Happy Tummy). 
                 Responde de forma amable y humana.
