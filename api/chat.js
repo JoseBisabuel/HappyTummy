@@ -41,7 +41,8 @@ module.exports = async (req, res) => {
                 Cliente dice: ${customerText}`;
 
                 const result = await model.generateContent(prompt);
-                const botReply = result.response.text();
+                const response = await result.response;
+                const botReply = response.text();
 
                 // --- RESPONDER A WHATSAPP ---
                 await axios({
