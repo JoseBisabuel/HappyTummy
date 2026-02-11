@@ -1,44 +1,30 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// 1. Configuración de la IA
+// 1. Inicialización ultra-compatible
+// Asegúrate de que en Vercel la variable se llame exactamente GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// IMPORTANTE: Si gemini-1.5-flash sigue dando 404, 
-// es un problema de actualización de librería (ejecuta: npm install @google/generative-ai)
-// Cambia la inicialización del modelo por esta:
-const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-}, { apiVersion: 'v1beta' }); // Forzamos explícitamente la versión de la API aquí
+// Usaremos un bloque try/catch preventivo para el modelo
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-const systemPrompt = `Eres el asistente experto de la tienda vegana Vitalis (Happy Tummy). 
-Responde de forma amable y humana.
-
-NUESTROS PRODUCTOS:
-- Avena x 500grs: $8.000.
-- Psyllium x 100grs: $15.000.
-- Linaza Mix x 450grs: $20.000.
-
+const VITALIS_CONTEXT = `Eres el asistente de Vitalis. 
+Productos: Avena ($8.000), Psyllium ($15.000), Linaza ($20.000). 
 Web: https://happytummy.vercel.app/`;
 
 module.exports = async (req, res) => {
-    // 2. Verificación para Meta
+    // Verificación Webhook
     if (req.method === "GET") {
-        const mode = req.query["hub.mode"];
         const token = req.query["hub.verify_token"];
         const challenge = req.query["hub.challenge"];
-
-        if (mode === "subscribe" && token === "vitalis123") {
-            return res.status(200).send(challenge);
-        }
-        return res.status(403).send("Error de verificación");
+        if (token === "vitalis123") return res.status(200).send(challenge);
+        return res.status(403).send("Error");
     }
 
-    // 3. Recepción de mensajes (POST)
     if (req.method === "POST") {
         try {
-            const body = req.body;
-            const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+            const entry = req.body.entry?.[0]?.changes?.[0]?.value;
+            const message = entry?.messages?.[0];
 
             if (message && message.type === "text") {
                 const customerPhone = message.from;
@@ -46,33 +32,38 @@ module.exports = async (req, res) => {
 
                 let botReply;
                 try {
-                    // Generamos contenido uniendo el sistema con la duda del cliente
-                    const result = await model.generateContent(`${systemPrompt}\n\nCliente: ${customerText}`);
+                    // Generación de contenido
+                    const prompt = `${VITALIS_CONTEXT}\n\nCliente: ${customerText}\nRespuesta:`;
+                    const result = await model.generateContent(prompt);
                     botReply = result.response.text();
                 } catch (aiError) {
-                    console.error("Fallo Gemini:", aiError.message);
-                    // Respuesta de respaldo si falla la IA (429 o 404)
-                    botReply = "¡Hola! Estamos recibiendo muchas consultas. Por favor, escríbenos de nuevo en unos segundos o visita nuestra web.";
+                    console.error("Fallo IA:", aiError.message);
+                    // Si falla la IA por cuota o auth, respondemos algo humano
+                    botReply = "¡Hola! Estamos recibiendo muchos mensajes. ¿En qué puedo ayudarte hoy? También puedes ver precios en https://happytummy.vercel.app/";
                 }
 
-                // --- RESPONDER A WHATSAPP ---
+                // --- RESPUESTA A WHATSAPP ---
+                // Aquí el 401 puede venir de Meta si el WHATSAPP_TOKEN está mal
                 await axios({
                     method: "POST",
                     url: `https://graph.facebook.com/v21.0/${process.env.PHONE_NUMBER_ID}/messages`,
-                    headers: { "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}` },
+                    headers: { 
+                        "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}`,
+                        "Content-Type": "application/json"
+                    },
                     data: {
                         messaging_product: "whatsapp",
                         to: customerPhone,
+                        type: "text",
                         text: { body: botReply }
                     }
                 });
             }
-            res.status(200).send("EVENT_RECEIVED");
+            res.status(200).send("OK");
         } catch (error) {
-            console.error("Error General:", error.message);
-            res.status(500).send("Error interno");
+            // El error 401 viene de aquí si Axios falla
+            console.error("Error en proceso:", error.response ? error.response.data : error.message);
+            res.status(500).send("Error");
         }
-    } else {
-        res.status(405).send("Método no permitido");
     }
 };
