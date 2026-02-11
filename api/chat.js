@@ -1,22 +1,20 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// 1. CARGA ÚNICA DEL CATÁLOGO
-let productos;
+// 1. CARGA SEGURA DEL CATÁLOGO
+let productos = null;
 try {
+  // Asegúrate de que el nombre del archivo sea exacto (mayúsculas/minúsculas)
   productos = require("./productos.json");
 } catch (e) {
-  console.error("Error al cargar productos.json:", e.message);
+  console.error("⚠️ No se pudo cargar productos.json:", e.message);
 }
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-// 2. CONFIGURACIÓN DEL MODELO (Asegúrate que coincida con el que probaste)
-const model = genAI.getGenerativeModel({
-  model: "gemini-3-flash-preview", 
-});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 module.exports = async (req, res) => {
-
-  // --- VERIFICACIÓN WEBHOOK ---
-
+  // --- VERIFICACIÓN WEBHOOK (GET) ---
   if (req.method === "GET") {
     const token = req.query["hub.verify_token"];
     const challenge = req.query["hub.challenge"];
@@ -24,14 +22,16 @@ module.exports = async (req, res) => {
     return res.status(403).send("Error de token");
   }
 
+  // --- PROCESAMIENTO DE MENSAJES (POST) ---
   if (req.method === "POST") {
     try {
       const entry = req.body.entry?.[0]?.changes?.[0]?.value;
       const message = entry?.messages?.[0];
 
-      if (message && message.type === "text") {
+      // VALIDACIÓN CRUCIAL: Solo procesar si es un mensaje de texto real
+      if (message?.type === "text" && message?.text?.body) {
         const customerPhone = message.from;
-        const customerText = message.text.body.toLowerCase(); // Convertimos a minúsculas para evaluar
+        const customerText = message.text.body;
 
         let botReply;
 
@@ -43,31 +43,16 @@ module.exports = async (req, res) => {
               return productos[categoria].map(p => `- ${p.nombre}: $${p.precio}`).join("\n");
             }).join("\n\n");
 
-            // --- NUEVAS INSTRUCCIONES DE PERSONALIDAD ---
-            const promptFinal = `Eres Vitalis, el asistente de la tienda "Happy Tummy" en Neiva.
-            
-            INFORMACIÓN DE LA TIENDA:
-            - Ubicación: [Inserta tu dirección aquí en Neiva]
-            - Horarios: Lunes a Sábado de 8:00 AM a 7:00 PM.
-            - Web: https://happytummy.vercel.app/
-            - Domicilios: Hacemos envíos en Neiva.
-
-            REGLAS DE COMPORTAMIENTO:
-            1. SALUDO: Solo di "Hola, soy Vitalis" si el cliente te está saludando por primera vez. Si es una continuación, no te presentes de nuevo.
-            2. CIERRE DE VENTA: Si el cliente dice que quiere comprar, desea un producto o dice "sí" a una compra, responde: "¡Excelente elección! 📝 Para procesar tu pedido, por favor confíame tu nombre completo, dirección en Neiva y un número de contacto."
-            3. BREVEDAD: No hagas listas gigantes a menos que te lo pidan.
-
-            CATÁLOGO:
-            ${catalogoTexto}
-
-            MENSAJE DEL CLIENTE: "${customerText}"
-            RESPUESTA VITALIS:`;
+            const promptFinal = `Eres Vitalis, asistente de "Happy Tummy" en Neiva. 
+            Catálogo:\n${catalogoTexto}\n
+            Mensaje: "${customerText}"\n
+            Respuesta:`;
 
             const result = await model.generateContent(promptFinal);
             botReply = result.response.text();
-
           } catch (aiError) {
-            botReply = "Lo siento, tuve un problema con el sistema. 🌱";
+            console.error("❌ Error Gemini:", aiError.message);
+            botReply = "Lo siento, tuve un problema temporal. ¿Me repites eso? 🌱";
           }
         }
 
@@ -86,9 +71,14 @@ module.exports = async (req, res) => {
           }
         });
       }
+
+      // IMPORTANTE: Siempre responder 200 a WhatsApp para que no reintente el envío
       return res.status(200).send("OK");
+
     } catch (error) {
-      return res.status(500).send("Error");
+      // Log detallado para ver en Vercel qué pasó exactamente
+      console.error("❌ ERROR CRÍTICO:", error.response?.data || error.message);
+      return res.status(500).json({ status: "error", message: error.message });
     }
   }
 };
