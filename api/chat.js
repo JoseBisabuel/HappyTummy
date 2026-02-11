@@ -1,7 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// 1. CARGA ÚNICA DEL CATÁLOGO
 let productos;
 try {
   productos = require("./productos.json");
@@ -10,30 +9,29 @@ try {
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-// 2. CONFIGURACIÓN DEL MODELO (Asegúrate que coincida con el que probaste)
 const model = genAI.getGenerativeModel({
-  model: "gemini-3-flash-preview", 
+  model: "gemini-3-flash-preview", // Versión estable para evitar errores de preview
 });
 
 module.exports = async (req, res) => {
-  // --- VERIFICACIÓN WEBHOOK ---
   if (req.method === "GET") {
     const token = req.query["hub.verify_token"];
     const challenge = req.query["hub.challenge"];
     if (token === "vitalis123") return res.status(200).send(challenge);
-    return res.status(403).send("Error de token");
+    return res.status(403).send("Error");
   }
 
-  // --- PROCESAMIENTO MENSAJE ---
   if (req.method === "POST") {
+    // 1. RESPUESTA INMEDIATA A META (Evita reintentos y mensajes duplicados/spam)
+    res.status(200).send("EVENT_RECEIVED");
+
     try {
       const entry = req.body.entry?.[0]?.changes?.[0]?.value;
       const message = entry?.messages?.[0];
 
       if (message && message.type === "text") {
         const customerPhone = message.from;
-        const customerText = message.text.body.toLowerCase(); // Convertimos a minúsculas para evaluar
+        const customerText = message.text.body;
 
         let botReply;
 
@@ -41,41 +39,41 @@ module.exports = async (req, res) => {
           botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Visítanos en: https://happytummy.vercel.app/";
         } else {
           try {
-            const catalogoTexto = Object.keys(productos).map(categoria => {
-              return productos[categoria].map(p => `- ${p.nombre}: $${p.precio}`).join("\n");
+            // Simplificamos el catálogo para que la IA no se bloquee con tanta info
+            const catalogoTexto = Object.keys(productos).map(cat => {
+              return productos[cat].map(p => `- ${p.nombre}: $${p.precio}`).join("\n");
             }).join("\n\n");
 
-            // --- NUEVAS INSTRUCCIONES DE PERSONALIDAD ---
-            const promptFinal = `Eres Vitalis, el asistente de la tienda "Vitalis Tienda Vegana y Vegetariana" en Neiva.
+            const promptFinal = `Eres Vitalis, asistente de "Vitalis Tienda Vegana y Vegetariana" en Neiva.
             
-            INFORMACIÓN DE LA TIENDA:
-            - Ubicación: Cl 4 #7-64, Neiva, Huila
-            - Horarios: Lunes a Jueves Jornada Continua de 8:00 AM a 6:00 PM. Viernes Jornada Continua de 8:00 AM a 5:00 PM.
-            - Enlace Google Maps: https://maps.google.com/?q=Calle+4+%237-64,+Neiva,+Huila
+            INFO:
+            - Ubicación: Cl 4 #7-64, Neiva. Maps: https://maps.google.com/?q=Calle+4+%237-64,+Neiva,+Huila
+            - Horarios: Lun-Jue 8am-6pm, Vie 8am-5pm (Jornada continua).
             - Web: https://happytummy.vercel.app/
-            - Domicilios: Hacemos envíos en Neiva.
+            - Redes: @vitalistiendavegana (IG y FB).
 
-            REGLAS DE COMPORTAMIENTO:
-            1. SALUDO: Solo di "Hola, soy Vitalis" si el cliente te está saludando por primera vez. Si es una continuación, no te presentes de nuevo.
-            2. CIERRE DE VENTA: Si el cliente dice que quiere comprar, desea un producto o dice "sí" a una compra, responde: "¡Excelente elección! 📝 Para procesar tu pedido, por favor confíame tu nombre completo, dirección en Neiva y un número de contacto."
-            3. BREVEDAD: No hagas listas gigantes a menos que te lo pidan.
-            4. Si el cliente pide el catálogo, envíe el enlace de la página explicando que allí encontrará todos los prodcutos y hacer el pedido directamente también.
-            5. Si pregunta por promociones, responda que por el momento no hay promociones activas, pero que puede agregar el número a whatsapp o que nos siga en nuestras redes sociales para que esté al tanto de las promociones y dele los enlaces si los pide.
-            6. enlaces de redes sociales: instagram https://www.instagram.com/vitalistiendavegana/ facebook: https://www.facebook.com/vitalistiendavegana.
-            7. "Una vez que el cliente haya proporcionado su nombre, dirección y contacto, despídete amablemente diciendo que un asesor verificará el pedido pronto y que, si tiene dudas adicionales, espere nuestra respuesta. Después de esto, tus respuestas deben ser muy breves."
-            8. Si preguntan que cuanto se demora el pedido responde que un asesor verificará el pedido pronto y te dará la información adicional que necesite.
-            
-            CATÁLOGO:
+            REGLAS:
+            1. No te presentes si ya saludaste.
+            2. Si piden catálogo, envía la web.
+            3. Si piden comprar o dan datos, di que un asesor verificará pronto.
+            4. Si preguntan cuanto se demora el pedido, di que un asesor informará pronto.
+            5. Si preguntan que cuanto vale el domicilio, di que un asesor revisará la información y te dará el precio.
+            6. Si preguntan que si hacen domicilios, di que si, que envíe la dirección, el barrio y un numero de telefono.
+
+            PRODUCTOS:
             ${catalogoTexto}
 
-            MENSAJE DEL CLIENTE: "${customerText}"
-            RESPUESTA VITALIS:`;
+            CLIENTE: "${customerText}"
+            VITALIS:`;
 
             const result = await model.generateContent(promptFinal);
-            botReply = result.response.text();
+            const response = await result.response;
+            botReply = response.text();
 
           } catch (aiError) {
-            botReply = "Lo siento, tuve un problema con el sistema. 🌱";
+            console.error("Error de IA:", aiError);
+            // Respuesta de respaldo si la IA se bloquea por filtros o tiempo
+            botReply = "¡Hola! 🌱 Para darte una mejor información sobre precios o productos, por favor consulta nuestra web: https://happytummy.vercel.app/ o espera un momento a que un asesor te atienda.";
           }
         }
 
@@ -94,9 +92,8 @@ module.exports = async (req, res) => {
           }
         });
       }
-      return res.status(200).send("OK");
     } catch (error) {
-      return res.status(500).send("Error");
+      console.error("Error General:", error.message);
     }
   }
 };
