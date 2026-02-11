@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
 // SOLO UNA VEZ: Usamos ../ para subir de la carpeta 'api' a la raíz
-const productos = require("../productos.json"); 
+const productos = require("./productos.json"); 
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
