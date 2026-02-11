@@ -13,7 +13,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // 2. CONFIGURACIÓN DEL MODELO (Asegúrate que coincida con el que probaste)
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash", 
+  model: "gemini-3-flash-preview", 
 });
 
 module.exports = async (req, res) => {
