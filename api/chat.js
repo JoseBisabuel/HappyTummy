@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Usa "gemini-1.5-flash" para mayor velocidad y economía, 
 // o "gemini-2.0-flash" si ya tienes acceso (es el más nuevo).
 const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash", 
+    model: "gemini-1.5-flash", 
     systemInstruction: `Eres el asistente experto de la tienda vegana Vitalis (Happy Tummy). 
     Responde de forma amable y humana.
     
