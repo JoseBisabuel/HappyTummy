@@ -1,19 +1,23 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// 1. CARGA SEGURA DEL CATÁLOGO
-let productos = null;
+// 1. CARGA DEL CATÁLOGO
+let productos;
 try {
-  // Asegúrate de que el nombre del archivo sea exacto (mayúsculas/minúsculas)
   productos = require("./productos.json");
 } catch (e) {
-  console.error("⚠️ No se pudo cargar productos.json:", e.message);
+  console.error("Error al cargar productos.json:", e.message);
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+// 2. CONFIGURACIÓN DEL MODELO (Asegúrate de usar 1.5-flash)
+const model = genAI.getGenerativeModel({
+  model: "gemini-2.0-flash", 
+});
 
 module.exports = async (req, res) => {
+
   // --- VERIFICACIÓN WEBHOOK (GET) ---
   if (req.method === "GET") {
     const token = req.query["hub.verify_token"];
@@ -28,7 +32,7 @@ module.exports = async (req, res) => {
       const entry = req.body.entry?.[0]?.changes?.[0]?.value;
       const message = entry?.messages?.[0];
 
-      // VALIDACIÓN CRUCIAL: Solo procesar si es un mensaje de texto real
+      // Verificamos que sea un mensaje de texto para no procesar "leídos" o "entregados"
       if (message?.type === "text" && message?.text?.body) {
         const customerPhone = message.from;
         const customerText = message.text.body;
@@ -39,20 +43,37 @@ module.exports = async (req, res) => {
           botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Visítanos en: https://happytummy.vercel.app/";
         } else {
           try {
+            // Formatear el catálogo para la IA
             const catalogoTexto = Object.keys(productos).map(categoria => {
-              return productos[categoria].map(p => `- ${p.nombre}: $${p.precio}`).join("\n");
+              return `--- ${categoria} ---\n` + productos[categoria].map(p => `- ${p.nombre}: $${p.precio}`).join("\n");
             }).join("\n\n");
 
-            const promptFinal = `Eres Vitalis, asistente de "Happy Tummy" en Neiva. 
-            Catálogo:\n${catalogoTexto}\n
-            Mensaje: "${customerText}"\n
-            Respuesta:`;
+            // --- AQUÍ ESTÁ TU PROMPT COMPLETO ---
+            const promptFinal = `Eres Vitalis, el asistente de la tienda "Happy Tummy" en Neiva.
+            
+            INFORMACIÓN DE LA TIENDA:
+            - Ubicación: Calle 15 # 5-20, Barrio Centro, Neiva (Ajusta con tu dirección real).
+            - Horarios: Lunes a Sábado de 8:00 AM a 7:00 PM.
+            - Web: https://happytummy.vercel.app/
+            - Domicilios: Hacemos envíos en toda Neiva.
+
+            REGLAS DE COMPORTAMIENTO:
+            1. SALUDO: Solo di "Hola, soy Vitalis" si el cliente te está saludando por primera vez. Si es una continuación, no te presentes de nuevo.
+            2. CIERRE DE VENTA: Si el cliente dice que quiere comprar, desea un producto o dice "sí" a una compra, responde: "¡Excelente elección! 📝 Para procesar tu pedido, por favor confíame tu nombre completo, dirección en Neiva y un número de contacto."
+            3. BREVEDAD: No hagas listas gigantes a menos que te lo pidan. Sé amable y usa emojis de plantas o comida saludable.
+
+            CATÁLOGO DISPONIBLE:
+            ${catalogoTexto}
+
+            MENSAJE DEL CLIENTE: "${customerText}"
+            RESPUESTA VITALIS:`;
 
             const result = await model.generateContent(promptFinal);
             botReply = result.response.text();
+
           } catch (aiError) {
-            console.error("❌ Error Gemini:", aiError.message);
-            botReply = "Lo siento, tuve un problema temporal. ¿Me repites eso? 🌱";
+            console.error("Error en Gemini:", aiError);
+            botReply = "Lo siento, tuve un pequeño problema técnico. ¿Podrías repetirme tu duda? 🌱";
           }
         }
 
@@ -72,13 +93,13 @@ module.exports = async (req, res) => {
         });
       }
 
-      // IMPORTANTE: Siempre responder 200 a WhatsApp para que no reintente el envío
+      // IMPORTANTE: Siempre responder 200 a Meta
       return res.status(200).send("OK");
 
     } catch (error) {
-      // Log detallado para ver en Vercel qué pasó exactamente
-      console.error("❌ ERROR CRÍTICO:", error.response?.data || error.message);
-      return res.status(500).json({ status: "error", message: error.message });
+      console.error("Error detallado:", error.response?.data || error.message);
+      // Aunque falle, enviamos 200 para que el webhook de WhatsApp no se bloquee reintentando
+      return res.status(200).send("Error procesado");
     }
   }
 };
