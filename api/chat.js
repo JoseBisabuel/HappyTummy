@@ -1,20 +1,28 @@
-const productos = require("../productos.json"); // Asegúrate de que la ruta sea correcta
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
-// 1. CARGAMOS TUS PRODUCTOS DESDE EL JSON
-const productos = require("./productos.json"); 
+
+// SOLO UNA VEZ: Usamos ../ para subir de la carpeta 'api' a la raíz
+const productos = require("../productos.json"); 
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Configuramos el modelo (aquí no ponemos los productos para no saturar la config inicial)
 const model = genAI.getGenerativeModel({ 
     model: "gemini-1.5-flash",
-    systemInstruction: `Eres el asistente de Vitalis. Tu deber es informar sobre los productos usando EXCLUSIVAMENTE la lista que se te proporcionará. Si el producto no está en la lista, di que no está disponible.`
+    systemInstruction: `Eres "Vitalis", el asistente de la tienda Happy Tummy. 
+    Tu objetivo es ayudar con información basada en el catálogo. 
+    Sé amable, breve y usa emojis saludables 🌱.`
 });
 
 module.exports = async (req, res) => {
-    // ... (Mantén tu código de verificación GET igual)
+    // 1. Verificación para Meta (Webhook)
+    if (req.method === "GET") {
+        const token = req.query["hub.verify_token"];
+        const challenge = req.query["hub.challenge"];
+        if (token === "vitalis123") return res.status(200).send(challenge);
+        return res.status(403).send("Error");
+    }
 
+    // 2. Recepción de mensajes (POST)
     if (req.method === "POST") {
         try {
             const entry = req.body.entry?.[0]?.changes?.[0]?.value;
@@ -26,32 +34,34 @@ module.exports = async (req, res) => {
 
                 let botReply;
                 try {
-                    // 2. CONVERTIMOS EL JSON A TEXTO PARA LA IA
+                    // Convertimos el JSON cargado arriba a texto para la IA
                     const catalogoTexto = JSON.stringify(productos, null, 2);
                     
-                    // Creamos un prompt que combine el catálogo con la pregunta
                     const promptFinal = `
-                        CATÁLOGO ACTUALIZADO:
+                        CATÁLOGO DE PRODUCTOS:
                         ${catalogoTexto}
 
                         PREGUNTA DEL CLIENTE:
                         ${customerText}
 
-                        Respuesta amable basada en el catálogo:
+                        Respuesta basada en el catálogo:
                     `;
 
                     const result = await model.generateContent(promptFinal);
                     botReply = result.response.text();
                 } catch (aiError) {
                     console.error("Fallo IA:", aiError.message);
-                    botReply = "Lo siento, tuve un problema al consultar el catálogo. Por favor intenta de nuevo.";
+                    botReply = "¡Hola! 🌱 En este momento no puedo consultar el catálogo, pero puedes ver todo en https://happytummy.vercel.app/";
                 }
 
                 // --- RESPUESTA A WHATSAPP ---
                 await axios({
                     method: "POST",
                     url: `https://graph.facebook.com/v21.0/${process.env.PHONE_NUMBER_ID}/messages`,
-                    headers: { "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}` },
+                    headers: { 
+                        "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}`,
+                        "Content-Type": "application/json"
+                    },
                     data: {
                         messaging_product: "whatsapp",
                         to: customerPhone,
@@ -61,7 +71,7 @@ module.exports = async (req, res) => {
             }
             res.status(200).send("OK");
         } catch (error) {
-            console.error("Error en proceso:", error.message);
+            console.error("Error en proceso:", error.response ? error.response.data : error.message);
             res.status(500).send("Error");
         }
     }
