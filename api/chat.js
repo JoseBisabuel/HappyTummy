@@ -30,8 +30,7 @@ module.exports = async (req, res) => {
                 
                 // Cambiamos a 'gemini-1.5-pro', que suele estar más disponible
                 const model = genAI.getGenerativeModel({
-                  model: "gemini-1.5-flash-latest
-"
+                  model: "gemini-1.5-flash-latest",
                 });
 
                 
