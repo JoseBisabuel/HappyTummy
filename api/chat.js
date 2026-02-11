@@ -25,11 +25,12 @@ module.exports = async (req, res) => {
                 const customerText = message.text.body;
 
                 // --- LLAMADA A LA IA (Usamos las variables de Vercel) ---
+                // --- LLAMADA A LA IA ---
                 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
                 
-                // Aquí añadimos la versión 'v1' para evitar el error 404 de la beta
+                // Cambiamos a 'gemini-1.5-pro', que suele estar más disponible
                 const model = genAI.getGenerativeModel(
-                    { model: "gemini-pro" },
+                    { model: "gemini-1.5-pro" }, 
                     { apiVersion: 'v1' }
                 );
                 
