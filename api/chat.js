@@ -1,24 +1,19 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-// Intentamos cargar el archivo JSON
+// Cargamos el catálogo (Ruta relativa correcta si está en /api)
 let productosData;
 try {
   productosData = require("./productos.json");
 } catch (e) {
   console.error("Error cargando productos.json:", e.message);
-  productosData = null;
 }
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+// CORRECCIÓN: Usamos el nombre técnico del modelo
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  systemInstruction: `Eres "Vitalis", el asistente de Happy Tummy en Neiva. 
-  Tu misión es dar información de productos de forma amable y saludable.
-  - Si el producto tiene precio 0 o dice "Agotado", informa que no hay stock.
-  - Usa emojis como 🌱, 🍎, ✨.
-  - Si no encuentras algo, sugiere visitar: https://happytummy.vercel.app/`
+  model: "gemini-1.5-flash", 
 });
 
 module.exports = async (req, res) => {
@@ -42,34 +37,31 @@ module.exports = async (req, res) => {
 
         let botReply;
 
-        // VERIFICACIÓN DE CATÁLOGO
         if (!productosData) {
-          botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Por ahora puedes ver todo en nuestra web: https://happytummy.vercel.app/";
+          botReply = "¡Hola! 🌱 Estamos actualizando el catálogo. Mira todo aquí: https://happytummy.vercel.app/";
         } else {
           try {
-            // Simplificamos el JSON para la IA: solo nombre, precio y descripción
-            // Esto evita que el mensaje sea demasiado largo (ahorra tokens)
-            const catalogoLimpio = Object.keys(productosData).map(cat => {
+            // Limpieza del JSON para que la IA no se pierda
+            const catalogoTexto = Object.keys(productosData).map(cat => {
               return productosData[cat].map(p => 
-                `- ${p.nombre}: $${p.precio} (${p.descripcion})`
+                `- ${p.nombre}: $${p.precio}. ${p.descripcion}`
               ).join("\n");
             }).join("\n\n");
 
-            const promptFinal = `
-              CATÁLOGO DISPONIBLE:
-              ${catalogoLimpio}
+            const promptFinal = `Eres Vitalis, asistente de Happy Tummy. 
+            Usa este catálogo:
+            ${catalogoTexto}
 
-              PREGUNTA DEL CLIENTE: "${customerText}"
-              
-              Responde de forma breve basándote en la lista anterior.
-            `;
+            Cliente: ${customerText}
+            Respuesta:`;
 
             const result = await model.generateContent(promptFinal);
-            botReply = result.response.text();
+            const response = await result.response;
+            botReply = response.text();
 
           } catch (aiError) {
-            console.error("Error Gemini:", aiError);
-            botReply = "¡Hola! 🌱 Tuve un problema al consultar los precios. ¿Te ayudo con algo más o prefieres ver la web?";
+            console.error("Error detallado de Gemini:", aiError);
+            botReply = "¡Hola! 🌱 No pude consultar el catálogo. Revisa nuestra web: https://happytummy.vercel.app/";
           }
         }
 
@@ -90,7 +82,7 @@ module.exports = async (req, res) => {
       }
       return res.status(200).send("OK");
     } catch (error) {
-      console.error("Error General:", error.message);
+      console.error("Error en el POST:", error.message);
       return res.status(500).send("Error");
     }
   }
