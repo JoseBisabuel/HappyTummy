@@ -81,7 +81,7 @@ MENSAJE DEL CLIENTE:
 RESPUESTA VITALIS:`;
 
             const response = await ai.models.generateContent({
-              model: "gemini-1.5-flash-latest",
+              gemini-1.5-pro-latest,
               contents: promptFinal,
             });
 
