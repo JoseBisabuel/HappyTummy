@@ -1,8 +1,10 @@
 {
-    "name": "happytummy-bot",
-    "version": "1.0.0",
-    "dependencies": {
-      "@google/generative-ai": "^0.21.0",
-      "axios": "^1.6.0"
-    }
+  "name": "happytummy-bot",
+  "version": "1.0.0",
+  "dependencies": {
+    "@google/genai": "^0.3.0",
+    "axios": "^1.6.0",
+    "groq-sdk": "^0.37.0",
+    "openai": "^6.21.0"
   }
+}
