@@ -20,11 +20,18 @@ module.exports = async (req, res) => {
 
   // --- VERIFICACIÓN WEBHOOK (GET) ---
   if (req.method === "GET") {
-    const token = req.query["hub.verify_token"];
-    const challenge = req.query["hub.challenge"];
-    if (token === "vitalis123") return res.status(200).send(challenge);
-    return res.status(403).send("Error de token");
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
+
+  if (mode === "subscribe" && token === "vitalis123") {
+    console.log("Webhook verificado correctamente");
+    return res.status(200).send(challenge);
   }
+
+  return res.status(403).send("Error de verificación");
+}
+
 
   // --- PROCESAMIENTO DE MENSAJES (POST) ---
   if (req.method === "POST") {
