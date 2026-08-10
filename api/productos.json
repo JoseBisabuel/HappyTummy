@@ -73,16 +73,6 @@
         }
       },
       {
-        "id": 8,
-        "nombre": "Arándanos x 125 grs",
-        "precio": 7000,
-        "imagen": "assets/productos/frutasDeshidratadas/arandanos125.jpg",
-        "descripcion": "Ayudan a regular la digestión y tratar trastornos oculares.",
-        "info_adicional": {
-          "beneficios": "Podrían prevenir ciertos tumores y protegen la vista."
-        }
-      },
-      {
         "id": 9,
         "nombre": "Arándanos x 250 grs",
         "precio": 13000,
@@ -326,7 +316,7 @@
       {
         "id": 33,
         "nombre": "Exotic Mix x 125grs",
-        "precio": 12000,
+        "precio": 15000,
         "imagen": "assets/productos/frutos-secos/mixtura90.jpeg",
         "descripcion": "Ricos en vitaminas B1, B3 y E. Aporta minerales y fibra.",
         "info_adicional": {
@@ -336,7 +326,7 @@
       {
         "id": 34,
         "nombre": "Mixtura Keto x 125grs",
-        "precio": 12000,
+        "precio": 15000,
         "imagen": "assets/productos/frutos-secos/mixturas.jpeg",
         "descripcion": "Mejoran el perfil lipídico. Fuente de proteínas y vitaminas.",
         "info_adicional": {
@@ -444,12 +434,12 @@
       },
       {
         "id": 44,
-        "nombre": "De Arroz 7 Unids",
+        "nombre": "Cuca 7 Unids",
         "precio": 7000,
-        "imagen": "assets/productos/galleteria/galletasArroz.jpeg",
-        "descripcion": "Alimento nutritivo, bajo en calorías y grasas, sin gluten.",
+        "imagen": "assets/productos/galleteria/Cucas.png",
+        "descripcion": "Cuca 7 unidades, crujientes y nutritivas.",
         "info_adicional": {
-          "beneficios": "Ideal para dietas ligeras.",
+          "beneficios": "Sabor tradicional y textura crocante.",
           "cantidad": "7 unidades"
         }
       }
@@ -507,14 +497,6 @@
       },
       {
         "id": "nov_002",
-        "nombre": "Aceite de Coco x 500ml",
-        "descripcion": "Prensado en frío. Fuente de ácidos grasos saludables.",
-        "precio": 0,
-        "imagen": "assets/productos/Novedades/aceiteCoco2.jpg",
-        "disponible": false
-      },
-      {
-        "id": "nov_003",
         "nombre": "Chicharrines Natural x 30gr",
         "descripcion": "Ricos en proteínas, colágeno y bajos en carbohidratos.",
         "precio": 3000,
@@ -523,9 +505,9 @@
       },
       {
         "id": "nov_004",
-        "nombre": "Chocolate 100% x 320gr",
+        "nombre": "Chocolate la lomita 100% x 320gr",
         "descripcion": "Grasas saludables, mejora la memoria y protege el corazón.",
-        "precio": 30000,
+        "precio": 34000,
         "imagen": "assets/productos/Novedades/chocolate100.jpg",
         "disponible": true
       },
@@ -543,7 +525,7 @@
         "id": "pan_001",
         "nombre": "Pan de Uvas Pasas y Maní",
         "descripcion": "Pan tajado hecho con harina integral.",
-        "precio": 7000,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/panuvasYmani.jpg",
         "disponible": true
       },
@@ -551,7 +533,7 @@
         "id": "pan_002",
         "nombre": "Pan de Quinua y Maní",
         "descripcion": "Pan tajado hecho con harina de Quinua.",
-        "precio": 7000,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/panQuinuaMani.jpg",
         "disponible": true
       },
@@ -559,7 +541,7 @@
         "id": "pan_003",
         "nombre": "Tostadas Integrales x 23Unids",
         "descripcion": "Hechas con harina integral.",
-        "precio": 7000,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/tostadas.jpeg",
         "disponible": true
       }
@@ -569,7 +551,7 @@
         "id": "esp_001",
         "nombre": "Pan de Arroz",
         "descripcion": "Pan hecho con harina de arroz.",
-        "precio": 7500,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/PanEspecial/panDeArrozIntegral.jpg",
         "disponible": true
       },
@@ -577,7 +559,7 @@
         "id": "esp_002",
         "nombre": "Rollitos de Canela x 7Unids",
         "descripcion": "Hechos con harina de avena.",
-        "precio": 7500,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/PanEspecial/rollosCanela.jpg",
         "disponible": true
       },
@@ -585,7 +567,7 @@
         "id": "esp_003",
         "nombre": "Bizcochos de Arroz x 5Unids",
         "descripcion": "Hechos con harina de arroz.",
-        "precio": 3000,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/PanEspecial/bizcochosArroz.jpg",
         "disponible": true
       },
@@ -593,8 +575,42 @@
         "id": "esp_004",
         "nombre": "Pan Masa Madre",
         "descripcion": "Hecho con harina de centeno.",
-        "precio": 6500,
+        "precio": 8000,
         "imagen": "assets/productos/panaderia/PanEspecial/panMasamadre.jpg",
+        "disponible": true
+      }
+    ],
+    "panaderia_masa_madre": [
+      {
+        "id": "masamadre_001",
+        "nombre": "Centeno Tajado",
+        "descripcion": "Con harina de Centeno y ajonjolí.",
+        "precio": 6500,
+        "imagen": "assets/productos/panaderia/PanMasaMadre/CentenoMasaMadre.jpg",
+        "disponible": true
+      },
+      {
+        "id": "masamadre_002",
+        "nombre": "Quinua Con semillas",
+        "descripcion": "Con harina de Quinua, semilla de chía, linaza, ajonjolí, girasol.",
+        "precio": 8500,
+        "imagen": "assets/productos/panaderia/PanMasaMadre/QuinoaMasaMadre.png",
+        "disponible": true
+      },
+      {
+        "id": "masamadre_003",
+        "nombre": "Sagú Tajado (redondo)",
+        "descripcion": "Harina de Sagú.",
+        "precio": 8500,
+        "imagen": "assets/productos/panaderia/PanMasaMadre/SaguMasaMadre.png",
+        "disponible": true
+      },
+      {
+        "id": "masamadre_004",
+        "nombre": "Chocolate Tajado (redondo)",
+        "descripcion": "Con harina de Quinua y cocoa.",
+        "precio": 9500,
+        "imagen": "assets/productos/panaderia/PanMasaMadre/ChocolateMasaMadre.png",
         "disponible": true
       }
     ],
@@ -624,19 +640,19 @@
         "disponible": true
       },
       {
-        "id": "pul_004",
-        "nombre": "Harina de Coco x 500gr",
-        "descripcion": "Contiene ácido láurico y tiene bajo índice glucémico.",
-        "precio": 15000,
-        "imagen": "assets/productos/pulverizados/harinaCoco.jpg",
-        "disponible": true
-      },
-      {
         "id": "pul_005",
         "nombre": "Harina de Avena x 500gr",
         "descripcion": "Favorece el tránsito intestinal y ayuda a reducir el colesterol.",
         "precio": 6000,
         "imagen": "assets/productos/pulverizados/harinaAvena.jpg",
+        "disponible": true
+      },
+      {
+        "id": "pul_013",
+        "nombre": "Sal Marina x 500gr",
+        "descripcion": "Ayuda a mejorar la digestión y prevenir calambres musculares.",
+        "precio": 3000,
+        "imagen": "assets/productos/pulverizados/salmarina1000.jpg",
         "disponible": true
       },
       {
@@ -781,7 +797,7 @@
         "id": "sem_011",
         "nombre": "Linaza en Pepa x 250gr",
         "descripcion": "Buena fuente de fibra con grasas saludables.",
-        "precio": 4000,
+        "precio": 5000,
         "imagen": "assets/productos/semillas/linazapepa250.jpg",
         "disponible": true
       },
