@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novedades - Vitalis</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.0">
-    <link rel="icon" type="image/x-icon" href="assets/icons/fondoHappyTummy.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/icons/fondoHappyTummy.png" alt="Logo de Vitalis">
+            <img src="assets/icons/fondoVitalis.png" alt="Logo de Vitalis" loading="lazy" decoding="async">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-search-list">
+                <li class="nav-search"><input type="text" id="buscador-productos" placeholder="Buscar productos..." autocomplete="off"><button type="button" class="search-clear" aria-label="Borrar busqueda" hidden>&times;</button><div id="resultados-busqueda" class="search-results" hidden></div></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="index.html#productos">Productos</a></li>                
+                <li><a href="index.html#productos">Productos</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
+                <li class="contacto-mobile-only"><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -27,81 +32,81 @@
         <section class="products">
             <h2>NOVEDADES</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/aceiteAjonjoliCrudo.jpg" alt="Aceite Ajonjolí 500">
+                <div id="prod-aceite-de-ajonjoli-x-500ml" class="product-card">
+                    <img src="assets/productos/Novedades/aceiteAjonjoliCrudo.jpg" alt="Aceite Ajonjolí 500" loading="lazy" decoding="async">
                     <h3>Aceite de Ajonjolí x 500ml</h3>
                     <p>Producto prensado en frío. <br> Propiedades que favorecen la salud cardiovascular.  <br>$31.000</p>                              
                     <button class="add-to-cart" data-name="Aceite/Ajonjolí x500ml" data-price="31000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines natural">
+                <div id="prod-chicharrines-natural-x30grs" class="product-card">
+                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines natural" loading="lazy" decoding="async">
                     <h3>Chicharrines Natural x30grs</h3>
                     <p>ricos en proteínas, colágeno, vitaminas, <br>minerales y grasas, y bajo en carbohidratos. <br>$3.000</p>                              
                     <button class="add-to-cart" data-name="Chicharrines/Natural x30grs" data-price="3000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines Picantes">
+                <div id="prod-chicharrines-picantes-x30grs" class="product-card">
+                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines Picantes" loading="lazy" decoding="async">
                     <h3>Chicharrines Picantes x30grs</h3>
                     <p>Contienen fibra, colágeno, proteínas, <br>vitaminas, minerales y otros nutrientes.<br>$3.000</p>                              
                     <button class="add-to-cart" data-name="Chicharrines/Picantes x30grs" data-price="3000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines Limón">
+                <div id="prod-chicharrines-de-limon-x30grs" class="product-card">
+                    <img src="assets/productos/Novedades/chicharrines.jpg" alt="Chicharrines Limón" loading="lazy" decoding="async">
                     <h3>Chicharrines de Limón x30grs</h3>
                     <p>Contribuyen a la sensación de saciedad, <br>lo que puede ayudar a controlar el peso. <br>$3.000</p>                              
                     <button class="add-to-cart" data-name="Chicharrines/Limón x30grs" data-price="3000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/chocolate100.jpg" alt="chocolate 320">
+                <div id="prod-chocolate-la-lomita-100-x-320grs" class="product-card">
+                    <img src="assets/productos/Novedades/chocolate100.jpg" alt="chocolate 320" loading="lazy" decoding="async">
                     <h3>Chocolate la lomita 100% <br> x 320grs</h3>
                     <p>Grasas saludables, mejora la memoria, <br> protege tu corazón <br>$34.000</p>                              
                     <button class="add-to-cart" data-name="Chocolate la lomita 100% x320grs" data-price="34000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/chocolate70.jpg" alt="chocolate 320">
+                <div id="prod-chocolate-70-x-320grs" class="product-card">
+                    <img src="assets/productos/Novedades/chocolate70.jpg" alt="chocolate 320" loading="lazy" decoding="async">
                     <h3>Chocolate 70% <br> x 320grs</h3>
                     <p>Grasas saludables, mejora la memoria, <br> protege tu corazón <br>$27.000</p>                              
                     <button class="add-to-cart" data-name="Chocolate70% x320grs" data-price="27000">Añadir al carrito</button>
                 </div>
-                <div class="product-card product-unavailable">
-                    <img src="assets/productos/Novedades/harina7Granos2.jpg" alt="Harina 7 Granos">
+                <div id="prod-harina-7-granos-x-500grs" class="product-card product-unavailable">
+                    <img src="assets/productos/Novedades/harina7Granos2.jpg" alt="Harina 7 Granos" loading="lazy" decoding="async">
                     <div class="sold-out-badge"></div>
                     <h3>Harina 7 Granos <br>x 500grs</h3>
                     <p>Grasas saludables, mejora la memoria, <br> protege tu corazón <br>((Producto Temporalmente Agotado))</p>                               
                     <button class="add-to-cart" data-name="Harina7Granos x500grs" data-price="Agotado" disabled>Agotado</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/cremaMani.jpg" alt="Mantequilla Mani 250">
+                <div id="prod-mantequilla-de-mani-x-250grs" class="product-card">
+                    <img src="assets/productos/Novedades/cremaMani.jpg" alt="Mantequilla Mani 250" loading="lazy" decoding="async">
                     <h3>Mantequilla de Maní <br> x 250grs</h3>
                     <p>Es un alimento nutritivo que contiene proteínas, <br>grasas saludables, vitaminas y minerales.  <br>$10.000</p>                              
                     <button class="add-to-cart" data-name="Mantequilla/Maní x250grs" data-price="10000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/cremaAlmendras.jpg" alt="Mantequilla Almendras 250">
+                <div id="prod-mantequilla-de-almendras-x-250grs" class="product-card">
+                    <img src="assets/productos/Novedades/cremaAlmendras.jpg" alt="Mantequilla Almendras 250" loading="lazy" decoding="async">
                     <h3>Mantequilla de Almendras <br> x 250grs</h3>
                     <p>Es un alimento nutritivo queayudar a reducir el <br>riesgo de enfermedades cardíacas y diabetes. <br>$20.000</p>                              
                     <button class="add-to-cart" data-name="Mantequilla/Almendras x250grs" data-price="20000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/cremaMarañon.jpg" alt="Mantequilla Marañon 250">
+                <div id="prod-mantequilla-de-maranon-x-250grs" class="product-card">
+                    <img src="assets/productos/Novedades/cremaMarañon.jpg" alt="Mantequilla Marañon 250" loading="lazy" decoding="async">
                     <h3>Mantequilla de Marañon <br> x 250grs</h3>
                     <p> es un producto rico en nutrientes que puede <br> ayudar a mejorar la salud cardiovascular. <br>$25.000</p>                              
                     <button class="add-to-cart" data-name="Mantequilla/Marañon x250grs" data-price="25000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/miel.png" alt="Miel de Abeja">
+                <div id="prod-miel-de-abeja-1-2-botella" class="product-card">
+                    <img src="assets/productos/Novedades/miel.png" alt="Miel de Abeja" loading="lazy" decoding="async">
                     <h3>Miel de Abeja <br>1/2 Botella</h3>
                     <p>Tiene propiedades nutritivas, antiinflamatorias, <br>antioxidantes, antisépticas, cicatrizantes, y más. <br>$23.000</p>                              
                     <button class="add-to-cart" data-name="Miel/Abeja 1/2Botella" data-price="23000">Añadir al carrito</button>
                 </div> 
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/vinagresManzanaAmbos2.jpg" alt="Vinagre Manzana Roja 500">
+                <div id="prod-vinagre-de-manzana-roja-x-375-ml" class="product-card">
+                    <img src="assets/productos/Novedades/vinagresManzanaAmbos2.jpg" alt="Vinagre Manzana Roja 500" loading="lazy" decoding="async">
                     <h3>Vinagre de Manzana Roja <br> x 375 ml</h3>
                     <p>Tiene propiedades antimicrobianas, <br>antiinflamatorias, antioxidantes. <br>$6.500</p>                              
                     <button class="add-to-cart" data-name="Vinagre/Manzana/Roja x375ml" data-price="6500">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/Novedades/vinagresManzanaAmbos2.jpg" alt="Vinagre Manzana Verde 500">
+                <div id="prod-vinagre-de-manzana-verde-x-375-ml" class="product-card">
+                    <img src="assets/productos/Novedades/vinagresManzanaAmbos2.jpg" alt="Vinagre Manzana Verde 500" loading="lazy" decoding="async">
                     <h3>Vinagre de Manzana Verde <br> x 375 ml</h3>
                     <p>Tiene propiedades antimicrobianas, <br>antiinflamatorias, antioxidantes. <br>$6.500</p>                              
                     <button class="add-to-cart" data-name="Vinagre/Manzana/Verde x375ml" data-price="6500">Añadir al carrito</button>
@@ -113,9 +118,11 @@
         <p>&copy; 2014 Tienda vegetariana y vegana Vitalis. Todos los derechos reservados.</p>
     </footer>
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
-        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+        <img src="assets/icons/whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>
     <script src="js/main.js"></script>
+    <script src="js/productos-data.js"></script>
+    <script src="js/buscador.js"></script>
     <script src="js/carrito.js"></script>
 </body>
 </html>

@@ -6,82 +6,86 @@
     <title>Tienda Vegetariana - Vitalis</title>
     <meta name="description" content="Tienda Vegetariana y Vegana - Vitalis">
 
-    <link rel="stylesheet" href="styles.css?v=1.0.3">
+    <link rel="stylesheet" href="styles.css?v=1.0.4">
 
     <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/icons/fondoVitalis.png" alt="Logo Vitalis">
+            <img src="assets/icons/fondoVitalis.png" alt="Logo Vitalis" loading="lazy" decoding="async">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-search-list">
+                <li class="nav-search"><input type="text" id="buscador-productos" placeholder="Buscar productos..." autocomplete="off"><button type="button" class="search-clear" aria-label="Borrar busqueda" hidden>&times;</button><div id="resultados-busqueda" class="search-results" hidden></div></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#productos">Productos</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
-                <li><a href="carrito.html">Carrito</a></li>               
             </ul>
         </nav>
     </header>
     <main>
         <section id="inicio" class="hero">
-            <h1>Tienda vegetariana y vegana</h1>          
-        </section>    
+            <h1>Tienda vegetariana y vegana</h1>
+        </section>
         <section id="productos" class="products">
             <h2>Nuestros Productos</h2>
             <div class="products-grid">
                 <div class="product-card">
                     <a href="panaderia.html">
-                        <img src="assets/productos/panaderia/panuvasYmani.jpg" alt="Panaderia">
+                        <img src="assets/productos/panaderia/panuvasYmani.jpg" alt="Panaderia" loading="lazy" decoding="async">
                         <h3>Panadería</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="granolas.html">
-                        <img src="assets/productos/granola/granolaHappy.png" alt="Granolas">
+                        <img src="assets/productos/granola/granolaHappy.png" alt="Granolas" loading="lazy" decoding="async">
                         <h3>Granolas</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="galletas.html">
-                        <img src="assets/productos/galleteria/galletasavena.png" alt="Galletas">
+                        <img src="assets/productos/galleteria/galletasavena.png" alt="Galletas" loading="lazy" decoding="async">
                         <h3>Galletería</h3>
                     </a>
                 </div>  
                 <div class="product-card">
                     <a href="frutosSecos.html">
-                        <img src="assets/productos/frutos-secos/frutosSecos.png" alt="Panes">
+                        <img src="assets/productos/frutos-secos/frutosSecos.png" alt="Panes" loading="lazy" decoding="async">
                         <h3>Frutos secos</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="frutasDeshidratadas.html">
-                        <img src="assets/productos/frutasDeshidratadas/frutasDeshidratadas.jpg" alt="Frutas Deshidratasas">
+                        <img src="assets/productos/frutasDeshidratadas/frutasDeshidratadas.jpg" alt="Frutas Deshidratasas" loading="lazy" decoding="async">
                         <h3>Frutos Deshidratados</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="pulverizados.html">
-                        <img src="assets/productos/pulverizados/pulverizados.jpg" alt="Pulverizados">
+                        <img src="assets/productos/pulverizados/pulverizados.jpg" alt="Pulverizados" loading="lazy" decoding="async">
                         <h3>Pulverizados</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="semillas.html">
-                        <img src="assets/productos/semillas/semillaArandano.png" alt="Semillas">
+                        <img src="assets/productos/semillas/semillaArandano.png" alt="Semillas" loading="lazy" decoding="async">
                         <h3>Semillas</h3>
                     </a>
                 </div>
                 <div class="product-card">
                     <a href="fibras.html">
-                        <img src="assets/productos/fibras/fibrasPrincipal.jpeg" alt="Fibras">
+                        <img src="assets/productos/fibras/fibrasPrincipal.jpeg" alt="Fibras" loading="lazy" decoding="async">
                         <h3>Fibras</h3>
                     </a>
                 </div>  
                 <div class="product-card">
                     <a href="novedades.html">
-                        <img src="assets/productos/Novedades/novedades.jpg" alt="Novedades">
+                        <img src="assets/productos/Novedades/novedades.jpg" alt="Novedades" loading="lazy" decoding="async">
                         <h3>Novedades</h3>
                     </a>
                 </div>                         
@@ -92,16 +96,16 @@
             <div class="gallery-reel">
                 <div class="reel-track">
                     <div class="reel-item">
-                        <img src="assets/galeria/imagen1.png" alt="Imagen 1">
+                        <img src="assets/galeria/imagen1.png" alt="Imagen 1" loading="lazy" decoding="async">
                     </div>
                     <div class="reel-item">
-                        <img src="assets/galeria/imagen2.jpeg" alt="Imagen 2">
+                        <img src="assets/galeria/imagen2.jpeg" alt="Imagen 2" loading="lazy" decoding="async">
                     </div>
                     <div class="reel-item">
-                        <img src="assets/galeria/imagen3.jpg" alt="Imagen 3">
+                        <img src="assets/galeria/imagen3.jpg" alt="Imagen 3" loading="lazy" decoding="async">
                     </div>
                     <div class="reel-item">
-                        <img src="assets/galeria/imagen4.jpg" alt="Imagen 4">
+                        <img src="assets/galeria/imagen4.jpg" alt="Imagen 4" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -146,13 +150,13 @@
             </div>
             <div class="social-media">
                 <a href="https://www.facebook.com/share/1AEApipxcU/" target="_blank" aria-label="Facebook">
-                    <img src="assets/icons/facebook.png" alt="Enlace a Facebook">
+                    <img src="assets/icons/facebook.png" alt="Enlace a Facebook" loading="lazy" decoding="async">
                 </a>
                 <a href="https://www.instagram.com/happytummyproductos?igsh=MXJ4MDdlcHdueWk0Ng==" target="_blank" aria-label="Instagram">
-                    <img src="assets/icons/instagram.png" alt="Enlace a Instagram">
+                    <img src="assets/icons/instagram.png" alt="Enlace a Instagram" loading="lazy" decoding="async">
                 </a>
                 <a href="https://maps.app.goo.gl/6Gg8R9FEPx1DpecY9" class="location-icon" target="_blank">
-                    <img src="assets/icons/map.png" alt="Ubicación">
+                    <img src="assets/icons/map.png" alt="Ubicación" loading="lazy" decoding="async">
                 </a>
             </div>
         </section>
@@ -161,8 +165,10 @@
         <p>&copy; 2014 Tienda vegetariana y vegana Vitalis. Todos los derechos reservados.</p>
     </footer>
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
-        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+        <img src="assets/icons/whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>    
     <script src="js/main.js"></script>
+    <script src="js/productos-data.js"></script>
+    <script src="js/buscador.js"></script>
 </body>
 </html>

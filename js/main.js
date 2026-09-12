@@ -19,6 +19,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // 1b. Menú desplegable (☰) en móvil
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+        const cerrarMenu = () => {
+            navLinks.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const abierto = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+            // Avisa al resto de la UI (ej. el buscador) para que se cierre y no se solapen
+            if (abierto) document.dispatchEvent(new CustomEvent('ui-dropdown-open', { detail: 'menu' }));
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', cerrarMenu);
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('nav')) cerrarMenu();
+        });
+
+        // Si se abre otro desplegable de la página (ej. el buscador), este se cierra
+        document.addEventListener('ui-dropdown-open', function (e) {
+            if (e.detail !== 'menu') cerrarMenu();
+        });
+    }
+
     // 2. Cambio de estilo del header al hacer scroll
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
@@ -100,5 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 moveToIndex(currentIndex + 1);
             }
         });
+    }
+
+    // 4. Resaltar el producto enlazado desde el buscador (window.resaltarProductoPorHash)
+    window.resaltarProductoPorHash = function (hash) {
+        const targetProduct = document.querySelector(hash || location.hash);
+        if (targetProduct && targetProduct.classList.contains('product-card')) {
+            targetProduct.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetProduct.classList.add('product-highlight');
+            setTimeout(() => targetProduct.classList.remove('product-highlight'), 2200);
+        }
+    };
+
+    if (location.hash) {
+        setTimeout(() => window.resaltarProductoPorHash(), 300);
     }
 });

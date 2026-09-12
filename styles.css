@@ -42,9 +42,18 @@ header {
     height: 70px;
 }
 
-nav ul {
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.nav-search-list,
+.nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 20px;
     margin: 0;
     padding: 0;
@@ -61,6 +70,22 @@ nav a {
 nav a:hover {
     color: var(--primary-color);
     transform: scale(1.2);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+/* En escritorio, "Contacto" solo se ve en la página principal (como al inicio) */
+.contacto-mobile-only {
+    display: none;
 }
 /* ========== BOTÓN VOLVER ========== */
 .back-to-products {
@@ -757,22 +782,64 @@ footer {
         height: 50px;
     }
 
-    nav ul {
-        gap: 10px;
-    }
-
     nav a {
         font-size: 0.9rem;
     }
+
+    /* Menú desplegable: en móvil, Inicio/Productos/Carrito/Contacto se ocultan detrás del botón ☰ */
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        background: rgba(41, 39, 39, 0.97);
+        padding: 16px 22px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        min-width: 170px;
+        z-index: 1400;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .contacto-mobile-only {
+        display: block;
+    }
+
+    .nav-search input {
+        width: 100px;
+    }
+
+    .nav-search input:focus {
+        width: 140px;
+    }
+
+    .search-results {
+        width: 240px;
+    }
     .back-to-products {
-        top: 125px; /* Ajusta según la altura de tu header en móvil */
+        top: 80px; /* Ajusta según la altura de tu header en móvil */
         left: 10px;
         padding: 6px 12px;
     }
-    
+
     .back-btn {
         font-size: 0.8rem;
     }
+
+    .products {
+        padding-top: 5rem; /* Deja espacio para que el header no tape el título */
+    }
+
     .hero h1 {
         margin-bottom: -22rem;
     }
@@ -860,4 +927,95 @@ footer {
     .hero p {
         font-size: 1.5rem;
     }
+}
+
+/* ========== BUSCADOR DE PRODUCTOS (en el header, todas las páginas) ========== */
+.nav-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input {
+    width: 150px;
+    padding: 6px 26px 6px 12px;
+    font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    outline: none;
+    background: #fff;
+    color: var(--background-color);
+    transition: width 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-search input:focus {
+    width: 210px;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 6px rgba(255, 204, 0, 0.6);
+}
+
+.search-clear {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-clear:hover {
+    color: var(--background-color);
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: 300px;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    max-height: 420px;
+    overflow-y: auto;
+    z-index: 1500;
+    text-align: left;
+}
+
+.search-result-item {
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: var(--background-color);
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: #f7f7f7;
+}
+
+.search-empty {
+    padding: 14px;
+    color: #777;
+    text-align: center;
+}
+
+/* Resalta el producto encontrado al llegar desde el buscador */
+.product-highlight {
+    animation: destacar-producto 2.2s ease;
+}
+
+@keyframes destacar-producto {
+    0%, 100% { box-shadow: var(--card-shadow); }
+    25%, 75% { box-shadow: 0 0 0 4px var(--primary-color); }
 }

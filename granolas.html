@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Granolas - Tienda Vegetariana Vitalis</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.0">
-    <link rel="icon" type="image/x-icon" href="assets/icons/fondoHappyTummy.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/icons/fondoHappyTummy.png" alt="Logo de Vitalis">
+            <img src="assets/icons/fondoVitalis.png" alt="Logo de Vitalis" loading="lazy" decoding="async">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-search-list">
+                <li class="nav-search"><input type="text" id="buscador-productos" placeholder="Buscar productos..." autocomplete="off"><button type="button" class="search-clear" aria-label="Borrar busqueda" hidden>&times;</button><div id="resultados-busqueda" class="search-results" hidden></div></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="index.html#productos">Productos</a></li>                
+                <li><a href="index.html#productos">Productos</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
+                <li class="contacto-mobile-only"><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -27,32 +32,32 @@
         <section class="products">
             <h2>GRANOLAS</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="assets/productos/granola/granolaEndulzada500.jpg" alt="Granola Endulzada">
+                <div id="prod-granola-endulzada-x-500gr" class="product-card">
+                    <img src="assets/productos/granola/granolaEndulzada500.jpg" alt="Granola Endulzada" loading="lazy" decoding="async">
                     <h3>Granola Endulzada x 500gr</h3>   
                     <p> La granola ayuda a que el sistema digestivo, <br>nutrientes que tienen acción antioxidante. <br>$8.000</p>                                     
                     <button class="add-to-cart" data-name="Granola/Endulzada x500grs" data-price="8000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/granola/granolaEndulzada1000.jpg" alt="Granola Endulzada">
+                <div id="prod-granola-endulzada-x1000gr" class="product-card">
+                    <img src="assets/productos/granola/granolaEndulzada1000.jpg" alt="Granola Endulzada" loading="lazy" decoding="async">
                     <h3>Granola Endulzada x1000gr</h3>   
                     <p> La granola ayuda a que el sistema digestivo, <br>nutrientes que tienen acción antioxidante. <br>$16.000</p>                                     
                     <button class="add-to-cart" data-name="Granola/Endulzada x1000grs" data-price="16000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/granola/granolaSInDulce500.jpg" alt="Granola sin dulce">
+                <div id="prod-granola-sin-dulce-x500gr" class="product-card">
+                    <img src="assets/productos/granola/granolaSInDulce500.jpg" alt="Granola sin dulce" loading="lazy" decoding="async">
                     <h3>Granola Sin Dulce x500gr</h3>   
                     <p>Ayuda a la digestión y a mantenerla regular, <br>Favorece la salud digestiva. <br>$8.000</p>                                     
                     <button class="add-to-cart" data-name="Granola/SinDulcex500grs" data-price="8000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/granola/granolasindulce1000.jpg" alt="Granola sin dulce">
+                <div id="prod-granola-sin-dulce-x1000gr" class="product-card">
+                    <img src="assets/productos/granola/granolasindulce1000.jpg" alt="Granola sin dulce" loading="lazy" decoding="async">
                     <h3>Granola Sin Dulce x1000gr</h3>   
                     <p>Ayuda a la digestión y a mantenerla regular, <br>Favorece la salud digestiva. <br>$16.000</p>                                     
                     <button class="add-to-cart" data-name="Granola/SinDulcex1000grs" data-price="16000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/granola/granolate.jpg" alt="Granola Artesanal">
+                <div id="prod-granolarte-x-400-grs-artesanal" class="product-card">
+                    <img src="assets/productos/granola/granolate.jpg" alt="Granola Artesanal" loading="lazy" decoding="async">
                     <h3>Granolarte x 400 grs<br>Artesanal</h3>   
                     <p>buena fuente de proteínas y antioxidantes, <br>Proporciona energía sostenida, <br>$12.000</p>                                     
                     <button class="add-to-cart" data-name="Granolarte x400grs" data-price="12000">Añadir al carrito</button>
@@ -64,9 +69,11 @@
         <p>&copy; 2014 Tienda vegetariana y vegana Vitalis. Todos los derechos reservados.</p>
     </footer>
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
-        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+        <img src="assets/icons/whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>
     <script src="js/main.js"></script>
+    <script src="js/productos-data.js"></script>
+    <script src="js/buscador.js"></script>
     <script src="js/carrito.js"></script>
 </body>
 </html>

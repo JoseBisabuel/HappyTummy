@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frutas Deshidratadas - Vitalis</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.0">
-    <link rel="icon" type="image/x-icon" href="assets/icons/fondoHappyTummy.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/icons/fondoHappyTummy.png" alt="Logo de Vitalis">
+            <img src="assets/icons/fondoVitalis.png" alt="Logo de Vitalis" loading="lazy" decoding="async">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-search-list">
+                <li class="nav-search"><input type="text" id="buscador-productos" placeholder="Buscar productos..." autocomplete="off"><button type="button" class="search-clear" aria-label="Borrar busqueda" hidden>&times;</button><div id="resultados-busqueda" class="search-results" hidden></div></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="index.html#productos">Productos</a></li>                
+                <li><a href="index.html#productos">Productos</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
+                <li class="contacto-mobile-only"><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -27,41 +32,41 @@
         <section class="products">
             <h2>FRUTAS DESHIDRATADAS</h2>
             <div class="products-grid">
-                <div class="product-card product-unavailable">
-                    <img src="assets/productos/frutasDeshidratadas/bayasdegoji100.jpg" alt="Bayas De Goji">
+                <div id="prod-bayas-de-goji-x-100-grs" class="product-card product-unavailable">
+                    <img src="assets/productos/frutasDeshidratadas/bayasdegoji100.jpg" alt="Bayas De Goji" loading="lazy" decoding="async">
                     <div class="sold-out-badge"></div>
                     <h3>Bayas De Goji x 100 grs</h3>
                     <p>Refuerzan las defensas del cuerpo, <br>Protegen la vista, <br>Luchan contra el cansancio. <br>((Producto Temporalmente Agotado))</p>                    
                     <button class="add-to-cart" data-name="Frutos Deshidratados/Bayas De Goji x100gr" data-price="Agotado" disabled>Agotado</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/frutasDeshidratadas/ciruelas250.jpg" alt="Ciruelas">
+                <div id="prod-ciruelas-x-250-grs" class="product-card">
+                    <img src="assets/productos/frutasDeshidratadas/ciruelas250.jpg" alt="Ciruelas" loading="lazy" decoding="async">
                     <h3>Ciruelas x 250 grs</h3>
                     <p>Retrasan el deterioro de las capacidades <br>cognitivas en la vejez <br> Reducen el apetito <br>$13.000</p>                    
                     <button class="add-to-cart" data-name="Frutos/Secos Ciruelas x250gr" data-price="13000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/frutasDeshidratadas/datiles125.jpg" alt="Dátiles">
+                <div id="prod-datiles-x-125-grs" class="product-card">
+                    <img src="assets/productos/frutasDeshidratadas/datiles125.jpg" alt="Dátiles" loading="lazy" decoding="async">
                     <h3>Dátiles x 125 grs</h3>
                     <p>Ayudan a aliviar el estreñimiento, <br>Excelente fuente de energía, <br>Reducen el colesterol malo.
                     <br>$7.500</p>                    
                     <button class="add-to-cart" data-name="Frutos/Secos Dátiles x125gr" data-price="7500">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/frutasDeshidratadas/datiles250.jpg" alt="Dátiles">
+                <div id="prod-datiles-x-250-grs" class="product-card">
+                    <img src="assets/productos/frutasDeshidratadas/datiles250.jpg" alt="Dátiles" loading="lazy" decoding="async">
                     <h3>Dátiles x 250 grs</h3>
                     <p>Ayudan a aliviar el estreñimiento, <br>Excelente fuente de energía, <br>Reducen el colesterol malo.
                     <br>$15.000</p>
                     <button class="add-to-cart" data-name="Frutos/Secos Dátiles x250gr" data-price="15000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/frutasDeshidratadas/uvaspasas250.jpg" alt="Uvas Pasas">
+                <div id="prod-uvas-pasas-x-250-grs" class="product-card">
+                    <img src="assets/productos/frutasDeshidratadas/uvaspasas250.jpg" alt="Uvas Pasas" loading="lazy" decoding="async">
                     <h3>Uvas Pasas x 250 grs</h3>
                     <p>Ayudan a regular la digestión, <br>Ayudan a tratar trastornos oculares, <br>Podrían prevenir ciertos tumores. <br>$6.000</p>                    
                     <button class="add-to-cart" data-name="Frutos/Secos Uvas Pasas x250gr" data-price="6000">Añadir al carrito</button>
                 </div>                
-                <div class="product-card product-unavailable">
-                    <img src="assets/productos/frutasDeshidratadas/bayasdegoji100.jpg" alt="Bayas De Goji">
+                <div id="prod-bayas-de-goji-x-100-grs-2" class="product-card product-unavailable">
+                    <img src="assets/productos/frutasDeshidratadas/bayasdegoji100.jpg" alt="Bayas De Goji" loading="lazy" decoding="async">
                     <div class="sold-out-badge"></div> 
                     <h3>Bayas De Goji x 100 grs</h3>
                     <p>Refuerzan las defensas del cuerpo, <br>Protegen la vista, <br>Luchan contra el cansancio.
@@ -75,9 +80,11 @@
         <p>&copy; 2014 Tienda vegetariana y vegana Vitalis. Todos los derechos reservados.</p>
     </footer>
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
-        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+        <img src="assets/icons/whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>    
     <script src="js/main.js"></script> 
+    <script src="js/productos-data.js"></script> 
+    <script src="js/buscador.js"></script> 
     <script src="js/carrito.js"></script> 
 </body>
 </html>

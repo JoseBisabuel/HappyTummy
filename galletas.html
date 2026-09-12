@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galleteria - Tienda Vegetariana Vitalis</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.0">
-    <link rel="icon" type="image/x-icon" href="assets/icons/fondoHappyTummy.png">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/icons/fondoHappyTummy.png" alt="Logo de Vitalis">
+            <img src="assets/icons/fondoVitalis.png" alt="Logo de Vitalis" loading="lazy" decoding="async">
         </div>
         <nav>
-            <ul>
+            <ul class="nav-search-list">
+                <li class="nav-search"><input type="text" id="buscador-productos" placeholder="Buscar productos..." autocomplete="off"><button type="button" class="search-clear" aria-label="Borrar busqueda" hidden>&times;</button><div id="resultados-busqueda" class="search-results" hidden></div></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+            <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="index.html#productos">Productos</a></li>                
+                <li><a href="index.html#productos">Productos</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
+                <li class="contacto-mobile-only"><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -27,67 +32,73 @@
         <section class="products">
             <h2>GALLETERÍA</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaUvas.jpg" alt="Avena con uvas">
+                <div id="prod-avena-con-uvas-7-unds" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaUvas.jpg" alt="Avena con uvas" loading="lazy" decoding="async">
                     <h3>Avena Con Uvas 7 unds</h3>   
                     <p>Ayuda a regular el tránsito intestinal, <br>rica en proteínas de origen vegetal. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galleta/Avenas/Uvas 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaChocolate.jpg" alt="Avena y chocolate">
+                <div id="prod-avena-y-chocolate-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaChocolate.jpg" alt="Avena y chocolate" loading="lazy" decoding="async">
                     <h3>Avena y Chocolate 7 unids</h3>   
                     <p>La combinación de avena y chocolate <br>proporciona una liberación sostenida de energía. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Choco 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaQuinua.jpg" alt="Avena y Quinua">
+                <div id="prod-avena-y-quinua-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaQuinua.jpg" alt="Avena y Quinua" loading="lazy" decoding="async">
                     <h3>Avena y Quinua 7 Unids</h3>   
                     <p>Son un snack nutritivo que puede ayudar <br>a controlar el colesterol y la glucosa en la sangre. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Quinua 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaAjonjoli.jpg" alt="Avena y Ajonjolí">
+                <div id="prod-avena-y-ajonjoli-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaAjonjoli.jpg" alt="Avena y Ajonjolí" loading="lazy" decoding="async">
                     <h3>Avena y Ajonjolí 7 Unids</h3>   
                     <p>Las galletas de avena y ajonjolí pueden <br>ser ricas en fibra, vitaminas, y minerales. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Ajonjolí 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaChia.jpg" alt="Avena, Chía y Linaza">
+                <div id="prod-avena-chia-y-linaza-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaChia.jpg" alt="Avena, Chía y Linaza" loading="lazy" decoding="async">
                     <h3>Avena, Chía y Linaza 7 Unids</h3>
                     <p>Ricas en fibra, omega-3, y nutrientes que pueden <br> ayudar con la digestión, saciedad, y energía. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Chía/Linaza 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaArandanos.jpg" alt="Avena y Arandanos">
+                <div id="prod-avena-y-arandanos-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaArandanos.jpg" alt="Avena y Arandanos" loading="lazy" decoding="async">
                     <h3>Avena y Arandanos 7 Unids</h3>
                     <p>Es fuente de proteínas y tiene <br>un alto contenido en fibra. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Arandanos 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaCoco.jpg" alt="Avena y Coco">
+                <div id="prod-avena-y-coco-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaCoco.jpg" alt="Avena y Coco" loading="lazy" decoding="async">
                     <h3>Avena y Coco 7 Unids</h3>
                     <p>pueden tener propiedades como ayudar a la <br>digestión, reducir el colesterol, y aportar fibra. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Coco 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card product-unavailable">
-                    <img src="assets/productos/galleteria/galletasavenaNuez.jpg" alt="Avena y Nuez">
+                <div id="prod-avena-y-nuez-7-unids" class="product-card product-unavailable">
+                    <img src="assets/productos/galleteria/galletasavenaNuez.jpg" alt="Avena y Nuez" loading="lazy" decoding="async">
 
                     <div class="sold-out-badge"></div> <h3>Avena y Nuez 7 Unids</h3>
                     <p>Son una fuente de energía, fibra, proteína, <br>y grasas saludables; antioxidantes y vitaminas. <br>((Producto Temporalmente Agotado))</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Nuez 6Unids" data-price="Agotado" disabled>Agotado</button>
 
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/galletasavenaAlmendras.jpg" alt="Avena y Almendras">
+                <div id="prod-avena-y-almendras-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/galletasavenaAlmendras.jpg" alt="Avena y Almendras" loading="lazy" decoding="async">
                     <h3>Avena y Almendras 7 Unids</h3>
                     <p>Las galletas de avena y almendras son un postre <br> nutritivo que aportan fibra, proteínas y vitaminas. <br>$7.000</p>                                     
                     <button class="add-to-cart" data-name="Galletas/Avena/Almendras 6Unids" data-price="7000">Añadir al carrito</button>
                 </div>
-                <div class="product-card">
-                    <img src="assets/productos/galleteria/Cucas.png" alt="Cuca 7 Unids">
+                <div id="prod-cuca-7-unids" class="product-card">
+                    <img src="assets/productos/galleteria/Cucas.png" alt="Cuca 7 Unids" loading="lazy" decoding="async">
                     <h3>Cuca 7 Unids</h3>
-                    <p>Galletas Cuca 7 unidades, crujientes y nutritivas. <br>$7.000</p>                                     
+                    <p>Galletas Cuca 7 unidades, crujientes y nutritivas. <br>$7.000</p>
                     <button class="add-to-cart" data-name="Galletas/Cuca 7 Unids" data-price="7000">Añadir al carrito</button>
+                </div>
+                <div id="prod-avena-y-bayas-de-goji-200g" class="product-card">
+                    <img src="assets/productos/galleteria/GalletasDeAvenaConbayasDeGoji.jpeg" alt="Avena y Bayas de Goji" loading="lazy" decoding="async">
+                    <h3>Avena y Bayas de Goji 200g</h3>
+                    <p>Naturalmente libre de gluten, hechas <br>con harina de avena y bayas de goji. <br>$7.000</p>
+                    <button class="add-to-cart" data-name="Galletas/Avena/Goji 200g" data-price="7000">Añadir al carrito</button>
                 </div>
             </div>
         </section>
@@ -96,9 +107,11 @@
         <p>&copy; 2014 Tienda vegetariana y vegana Vitalis. Todos los derechos reservados.</p>
     </footer>
     <a href="https://wa.me/3144030783" class="whatsapp-btn" target="_blank">
-        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
+        <img src="assets/icons/whatsapp.png" alt="WhatsApp" loading="lazy" decoding="async">
     </a>
     <script src="js/main.js"></script>
+    <script src="js/productos-data.js"></script>
+    <script src="js/buscador.js"></script>
     <script src="js/carrito.js"></script>
 </body>
 </html>
