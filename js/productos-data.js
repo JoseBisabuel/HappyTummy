@@ -861,6 +861,16 @@ const PRODUCTOS = [
     "category": "SEMILLAS"
   },
   {
+    "id": "quinua-roja-x-250-grs",
+    "name": "Quinua Roja x 250 grs",
+    "price": 9000,
+    "available": true,
+    "image": "assets/productos/semillas/quinuaRoja250.jpg",
+    "alt": "Quinua Roja",
+    "page": "semillas.html",
+    "category": "SEMILLAS"
+  },
+  {
     "id": "avena-x-500grs",
     "name": "Avena x 500grs",
     "price": 8000,

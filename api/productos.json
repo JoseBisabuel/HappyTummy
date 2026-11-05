@@ -824,6 +824,14 @@
         "precio": 13000,
         "imagen": "assets/productos/semillas/quinua500.jpg",
         "disponible": true
+      },
+      {
+        "id": "sem_015",
+        "nombre": "Quinua Roja x 250gr",
+        "descripcion": "Aporta más fibra y antioxidantes, ayudando a la salud digestiva y a dar energía natural al cuerpo.",
+        "precio": 9000,
+        "imagen": "assets/productos/semillas/quinuaRoja250.jpg",
+        "disponible": true
       }
     ]
   }

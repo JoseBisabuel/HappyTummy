@@ -6,7 +6,7 @@
     <title>Tienda Vegetariana - Vitalis</title>
     <meta name="description" content="Tienda Vegetariana y Vegana - Vitalis">
 
-    <link rel="stylesheet" href="styles.css?v=1.0.4">
+    <link rel="stylesheet" href="styles.css?v=1.0.5">
 
     <link rel="icon" type="image/x-icon" href="assets/icons/fondoVitalis.png">
 </head>
@@ -24,7 +24,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#productos">Productos</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#recetas">Recetas</a></li>
             </ul>
         </nav>
     </header>
@@ -113,6 +113,16 @@
             <button class="prev-btn" aria-label="Anterior"></button>
             <button class="next-btn" aria-label="Siguiente"></button>
         </section>
+        <section id="recetas" class="recetas-home">
+            <h2>RECETAS</h2>
+            <p class="recetas-intro">Ideas fáciles para preparar en casa con nuestros productos.</p>
+            <div class="recetas-carrusel">
+                <div id="recetas-track" class="recetas-track"></div>
+                <button type="button" class="recetas-prev" aria-label="Receta anterior"></button>
+                <button type="button" class="recetas-next" aria-label="Receta siguiente"></button>
+            </div>
+            <div id="recetas-dots" class="recetas-dots"></div>
+        </section>
         <section id="contacto" class="contact-info">
             <h2>Información de Contacto</h2>
             <div class="contact-container">
@@ -170,5 +180,6 @@
     <script src="js/main.js"></script>
     <script src="js/productos-data.js"></script>
     <script src="js/buscador.js"></script>
+    <script src="js/recetas.js"></script>
 </body>
 </html>
