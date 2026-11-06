@@ -1019,15 +1019,6 @@ footer {
     0%, 100% { box-shadow: var(--card-shadow); }
     25%, 75% { box-shadow: 0 0 0 4px var(--primary-color); }
 }
-/* ========== IMAGEN COMPLETA EN TARJETA (producto vertical) ========== */
-.product-card img.img-completa {
-    object-fit: contain;
-    height: 410px;
-}
-
-.product-card:hover img.img-completa {
-    transform: none;
-}
 
 /* ========== RECETAS: SECCIÓN EN EL INICIO ========== */
 .recetas-home {
@@ -1256,7 +1247,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .product-card img.img-completa { height: 280px; }
     .receta-card { width: 100%; }
     .receta-detalle { flex-direction: column; }
     .receta-detalle-img { flex: none; }

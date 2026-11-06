@@ -865,7 +865,7 @@ const PRODUCTOS = [
     "name": "Quinua Roja x 250 grs",
     "price": 9000,
     "available": true,
-    "image": "assets/productos/semillas/quinuaRoja250.jpg",
+    "image": "assets/productos/semillas/quinuaRoja250Tarjeta.jpg",
     "alt": "Quinua Roja",
     "page": "semillas.html",
     "category": "SEMILLAS"
